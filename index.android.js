@@ -11,11 +11,13 @@ import {
   Text,
   View
 } from 'react-native';
-
+import { Provider } from 'react-redux';
+import { createStore } from 'redux'
 // import stylesheets
 import indexStyles from './src/styles/index';
 // components
 import HomeView from './src/homeview';
+import SearchCity from './src/components/searchcity';
 
 export default class CheekyWeatherApp extends Component {
   constructor() {
@@ -37,12 +39,12 @@ export default class CheekyWeatherApp extends Component {
             return { payloadChange: !previousState.payload };
           });
 
-          console.warn('fired req, received res');
           // if the payload changes update.
           if (this.state.payloadChange) {
             this.setState({
               payload: responseJson
             });
+            console.warn('updated');
           }
         })
         .catch((error) => {
@@ -56,6 +58,7 @@ export default class CheekyWeatherApp extends Component {
       <View>
        { console.warn(JSON.stringify(this.state.payload)) }
         <HomeView />
+        <SearchCity payload={ this.state.payload }/>
       </View>
     );
   }
