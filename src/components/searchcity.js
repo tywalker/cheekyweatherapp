@@ -15,7 +15,7 @@ const SearchCity = ( props ) => {
     <View>
       <Text> SearchCity/ </Text>
     </View>
-  );
+  )
 }
 
 export default SearchCity;
