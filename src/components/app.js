@@ -9,36 +9,54 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  TouchableNativeFeedback,
   View
 } from 'react-native';
-import { Provider, connect } from 'react-redux';
+import { Provider } from 'react-redux';
 import { createStore } from 'redux'
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 // actions
-import { addCity } from '../actions';
+import { addForecast, addCity } from '../actions';
 // reducers
 import weatherApp from '../reducers/index';
+// containers
+import AddForecast from '../containers/AddForecast';
+import ForecastsList from '../containers/ShowForecasts';
 // import stylesheets
 import indexStyles from '../styles/index';
-// components
-import SearchCity from '../components/searchcity';
 
-const App = ({ dispatch }) => {
+const store = createStore(weatherApp);
+//
+// let ShowForecasts = ({ forecasts }) => {
+//   return (
+//     <View>
+//       <Text>Yeh yeh</Text>
+//     </View>
+//   )
+// }
 
+const App = () => {
   return (
     <View>
       <Text>Hello World. This is the App component</Text>
-      <TouchableNativeFeedback onPress={ () => dispatch(addCity('Sunny')) }>
-        <View style={ { width: '100%', height: 50, backgroundColor: '#eee' } }>
-          <Text>Press Me to Add Weather</Text>
-        </View>
-      </TouchableNativeFeedback>
+      <AddForecast />
+      <ForecastsList />
     </View>
   );
-
 }
-
-App = connect()(App)
+//
+// const mapStateToProps = state => {
+//   return {
+//     forecasts: ShowForecasts( state.forecasts )
+//   }
+// }
+//
+// forecasts = connect(mapStateToProps)(ShowForecasts)
+      //<ShowForecasts />
+// App.propTypes = {
+//   condition: PropTypes.string.isRequired,
+//   city: PropTypes.string.isRequired,
+// }
 
 export default App;

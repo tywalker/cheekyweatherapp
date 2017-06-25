@@ -5,6 +5,13 @@ export const addForecast = text => {
   }
 }
 
+export const showForecasts = index => {
+  return {
+    type: 'SHOW_FORECASTS',
+    index
+  }
+}
+
 export const addCity = text => {
   return {
     type: 'ADD_CITY',

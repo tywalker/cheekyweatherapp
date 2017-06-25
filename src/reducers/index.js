@@ -1,17 +1,29 @@
 import { combineReducers } from 'redux';
 import { addWeather, addCity } from '../actions'
 
-const forecasts = (state = [], action) => {
+function forecasts(state = [], action) {
   switch (action.type) {
     case 'ADD_FORECAST':
       return [
         ...state,
         {
-          condition: action.type
+          condition: action.text,
+        }
+      ]
+    case 'SHOW_FORECASTS':
+      return [
+        ...state,
+        {
+          forecast: state.map(
+            (forecast, index) => {
+              if (index === action.index) {
+                return forecast[index];
+              }
+            })
         }
       ]
     default:
-      return state
+      return state;
   }
 }
 const cities = (state = [], action) => {
