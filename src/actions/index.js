@@ -12,6 +12,13 @@ export const showForecast = index => {
   }
 }
 
+export const removeForecast = index => {
+  return {
+    type: 'REMOVE_FORECAST',
+    index
+  }
+}
+
 export const addCity = text => {
   return {
     type: 'ADD_CITY',

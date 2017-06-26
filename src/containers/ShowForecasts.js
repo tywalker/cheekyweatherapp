@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text, TouchableNativeFeedback, View } from 'react-native';
 import { connect } from 'react-redux';
-import { showForecast } from '../actions';
+import { removeForecast } from '../actions';
 
 import App from '../components/app';
 
@@ -9,11 +9,11 @@ const ListForecasts = ({ condition }) => {
   <Text>{ condition }</Text>
 }
 
-const wrapForecasts = ({ forecasts, testing, forecast }) => {
+const wrapForecasts = ({ forecasts, removeOnPress }) => {
   return (
     <View>
       { forecasts.map( (forecast, index) =>
-        <Text key={ index }>{ forecast.condition }</Text>
+        <Text key={ index } onPress={ () => removeOnPress(index) }>{ forecast.condition }</Text>
       )}
     </View>
   )
@@ -32,11 +32,13 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => {
+  console.log('working')
   return {
-    forecast: id => { dispatch(showForecast(id)) }
+    removeOnPress: id => { dispatch(removeForecast(id)) }
+    //forecast: id => { dispatch(showForecast(id)) }
   }
 }
 
-const ForecastsList = connect(mapStateToProps)(wrapForecasts);
+const ForecastsList = connect(mapStateToProps, mapDispatchToProps)(wrapForecasts);
 
 export default ForecastsList;
