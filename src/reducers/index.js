@@ -23,13 +23,8 @@ function forecasts(state = [], action) {
         }
       ]
     case 'REMOVE_FORECAST':
-    console.log(state)
-      return state.map((forecast, index) => {
-        if (index === action.index) {
-          return state.filter( index => index !== action.index );
-        }
-        return forecast
-      })
+      state = state.filter( (forecast, index) => index !== action.index )
+      return state;
     default:
       return state;
   }
