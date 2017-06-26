@@ -30,14 +30,6 @@ const store = createStore(weatherApp);
 //   console.log(store.getState());
 // });
 //
-store.dispatch(addCity('hello'));
-store.dispatch(addCity('there'));
-store.dispatch(addCity('billy'));
-store.dispatch(addForecast('billy'));
-store.dispatch(addForecast('billy'));
-store.dispatch(addForecast('billy'));
-store.dispatch(addForecast('billy'));
-store.dispatch(addForecast('billy'));
 const CheekyWeatherApp = () => (
   <Provider store={ store }>
     <App />

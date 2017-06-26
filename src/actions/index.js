@@ -5,9 +5,9 @@ export const addForecast = text => {
   }
 }
 
-export const showForecasts = index => {
+export const showForecast = index => {
   return {
-    type: 'SHOW_FORECASTS',
+    type: 'SHOW_FORECAST',
     index
   }
 }

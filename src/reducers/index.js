@@ -10,7 +10,7 @@ function forecasts(state = [], action) {
           condition: action.text,
         }
       ]
-    case 'SHOW_FORECASTS':
+    case 'SHOW_FORECAST':
       return [
         ...state,
         {

@@ -27,15 +27,6 @@ import ForecastsList from '../containers/ShowForecasts';
 import indexStyles from '../styles/index';
 
 const store = createStore(weatherApp);
-//
-// let ShowForecasts = ({ forecasts }) => {
-//   return (
-//     <View>
-//       <Text>Yeh yeh</Text>
-//     </View>
-//   )
-// }
-
 const App = () => {
   return (
     <View>
@@ -45,18 +36,4 @@ const App = () => {
     </View>
   );
 }
-//
-// const mapStateToProps = state => {
-//   return {
-//     forecasts: ShowForecasts( state.forecasts )
-//   }
-// }
-//
-// forecasts = connect(mapStateToProps)(ShowForecasts)
-      //<ShowForecasts />
-// App.propTypes = {
-//   condition: PropTypes.string.isRequired,
-//   city: PropTypes.string.isRequired,
-// }
-
 export default App;
