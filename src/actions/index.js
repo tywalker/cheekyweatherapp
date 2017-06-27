@@ -32,3 +32,10 @@ export const searchText = text => {
     text
   }
 }
+
+export const gimmeLogs = text => {
+  return {
+    type: 'GIMME_LOGS',
+    text
+  }
+}

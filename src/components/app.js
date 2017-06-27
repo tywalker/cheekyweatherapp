@@ -15,16 +15,15 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux'
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-// components
-import SearchCity from './searchcity';
 
 // actions
-import { addForecast, addCity } from '../actions';
+import { addForecast, addCity, searchText } from '../actions';
 // reducers
 import weatherApp from '../reducers/index';
 // containers
 import AddForecast from '../containers/AddForecast';
 import ForecastsList from '../containers/ShowForecasts';
+import SearchText from '../containers/SearchText';
 // import stylesheets
 import indexStyles from '../styles/index';
 
@@ -35,7 +34,7 @@ const App = () => {
       <Text>Hello World. This is the App component</Text>
       <AddForecast />
       <ForecastsList />
-      <SearchCity />
+      <SearchText />
     </View>
   );
 }

@@ -15,8 +15,6 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux'
 import PropTypes from 'prop-types';
 
-// actions
-import { addForecast, addCity } from './src/actions';
 // reducers
 import weatherApp from './src/reducers/index';
 // import stylesheets

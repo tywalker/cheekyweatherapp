@@ -6,14 +6,16 @@ import {
   View
 } from 'react-native';
 import { connect } from 'react-redux';
-import { addForecast } from '../actions';
-import { searchText } from '../actions'
+import { searchText, gimmeLogs } from '../actions/index'
 
 let SearchText = ( { dispatch } ) => {
   let warn = console.log('warning, warning, warning');
   return (
     <View>
-      <TextInput onChangeText={ (text) => dispatch.searchText(text) } />
+      <TextInput onChangeText={ (text) => dispatch(searchText(text)) } />
+      <TouchableNativeFeedback onPress={ () => dispatch(gimmeLogs('')) }>
+        <Text>Press me to see something crazy!</Text>
+      </TouchableNativeFeedback>
     </View>
   );
 }
