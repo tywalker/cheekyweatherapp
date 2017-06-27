@@ -3,8 +3,6 @@ import { Text, TouchableNativeFeedback, View } from 'react-native';
 import { connect } from 'react-redux';
 import { removeForecast } from '../actions';
 
-import App from '../components/app';
-
 const ListForecasts = ({ condition }) => {
   <Text>{ condition }</Text>
 }

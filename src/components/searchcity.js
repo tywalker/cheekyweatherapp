@@ -10,10 +10,12 @@ import {
   View
 } from 'react-native';
 
+import SearchText from '../containers/SearchText';
+
 const SearchCity = ( props ) => {
   return (
     <View>
-      <Text> SearchCity/ </Text>
+      <SearchText />
     </View>
   )
 }

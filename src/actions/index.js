@@ -25,3 +25,10 @@ export const addCity = text => {
     text
   }
 }
+
+export const searchText = text => {
+  return {
+    type: 'SEARCH_TEXT',
+    text
+  }
+}

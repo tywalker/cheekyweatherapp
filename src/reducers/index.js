@@ -38,6 +38,13 @@ const cities = (state = [], action) => {
           city: action.type
         }
       ]
+    case 'SEARCH_TEXT':
+      return [
+        ...state,
+        {
+          searchText: action.text
+        }
+      ]
     default:
       return state
   }

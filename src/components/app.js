@@ -15,6 +15,8 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux'
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+// components
+import SearchCity from './searchcity';
 
 // actions
 import { addForecast, addCity } from '../actions';
@@ -33,6 +35,7 @@ const App = () => {
       <Text>Hello World. This is the App component</Text>
       <AddForecast />
       <ForecastsList />
+      <SearchCity />
     </View>
   );
 }
