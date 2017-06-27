@@ -11,20 +11,27 @@ import {
   Text,
   View
 } from 'react-native';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux'
+import PropTypes from 'prop-types';
 
+// reducers
+import weatherApp from './src/reducers/index';
 // import stylesheets
 import indexStyles from './src/styles/index';
 // components
-import HomeView from './src/homeview';
+import App from './src/components/app';
 
-export default class CheekyWeatherApp extends Component {
-  render() {
-    return (
-      <View>
-        <HomeView />
-      </View>
-    );
-  }
-}
+const store = createStore(weatherApp);
+// console.log(store.getState())
+// let unsubscribe = store.subscribe(() => {
+//   console.log(store.getState());
+// });
+//
+const CheekyWeatherApp = () => (
+  <Provider store={ store }>
+    <App />
+  </Provider>
+)
 
 AppRegistry.registerComponent('CheekyWeatherApp', () => CheekyWeatherApp);
