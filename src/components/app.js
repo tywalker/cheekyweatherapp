@@ -23,7 +23,7 @@ import weatherApp from '../reducers/index';
 // containers
 import AddForecast from '../containers/AddForecast';
 import ForecastsList from '../containers/ShowForecasts';
-import SearchText from '../containers/SearchText';
+import SearchCity from './searchcity';
 // import stylesheets
 import indexStyles from '../styles/index';
 
@@ -34,7 +34,7 @@ const App = () => {
       <Text>Hello World. This is the App component</Text>
       <AddForecast />
       <ForecastsList />
-      <SearchText />
+      <SearchCity />
     </View>
   );
 }
