@@ -7,8 +7,10 @@
 import React, { Component } from 'react';
 import {
   AppRegistry,
+  ScrollView,
   StyleSheet,
   Text,
+  TouchableNativeFeedback,
   View
 } from 'react-native';
 import { Provider } from 'react-redux';
@@ -30,7 +32,9 @@ const store = createStore(weatherApp);
 //
 const CheekyWeatherApp = () => (
   <Provider store={ store }>
-    <App />
+    <ScrollView scrollEnabled={ false }>
+      <App />
+    </ScrollView>
   </Provider>
 )
 

@@ -9,24 +9,25 @@ import { connect } from 'react-redux';
 import { searchText, gimmeLogs } from '../actions/index'
 
 let SearchText = ( { dispatch } ) => {
-
-  let timerFired = function() {
-      console.log('fired');
-      window.myTimer = setTimeout(timerFired, 1000);
+  let startTyping = function() {
+      timeTextChange = setTimeout(startTyping, 400);
   };
 
-  let reset = function() {
-      clearTimeout(window.myTimer);
-      window.myTimer = setTimeout(timerFired, 1000);
+  let resetTimer = function(text) {
+      clearTimeout(window.timeTextChange);
+      timeTextChange = setTimeout(startTyping, 400);
   };
 
-  let myTimer = setTimeout(timerFired, 1000);
+  const initTimer = () => {
+    timeTextChange = setTimeout(startTyping, 400);
+  }
 
   return (
     <View>
-      <TextInput onChangeText={ text => reset() }
+      <TextInput onChangeText={ text => resetTimer() }
                  onSubmitEditing={ () => { true } }
-                 editable={ true }/>
+                 editable={ true }
+                 onFocus={ () => initTimer() }/>
       <TouchableNativeFeedback onPress={ () => dispatch(gimmeLogs('')) } >
         <Text>Press me to see something crazy!</Text>
       </TouchableNativeFeedback>
