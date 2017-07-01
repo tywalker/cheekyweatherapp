@@ -33,9 +33,17 @@ export const searchText = text => {
   }
 }
 
-export const gimmeLogs = text => {
+
+export const queryCities = text => {
   return {
-    type: 'GIMME_LOGS',
+    type: 'QUERY_CITIES',
+    text
+  }
+}
+
+export const displayCities = text => {
+  return{
+    type: 'DISPLAY_CITIES',
     text
   }
 }

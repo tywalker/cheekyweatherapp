@@ -19,6 +19,7 @@ let SearchText = ( { dispatch } ) => {
   };
 
   const initTimer = () => {
+    console.log('timer initiated')
     timeTextChange = setTimeout(startTyping, 400);
   }
 

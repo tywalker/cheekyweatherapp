@@ -42,9 +42,13 @@ const cities = (state = [], action) => {
       return Object.assign({}, state, {
           text: action.text
         })
-    case 'GIMME_LOGS':
+    case 'QUERY_CITIES':
       // using state.text we can create a action to query the cities
-      console.log(state.text);
+      
+      return
+    case 'DISPLAY_CITIES':
+      // using state.text we can create a action to query the cities
+      return
     default:
       return state
   }
