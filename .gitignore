@@ -54,3 +54,8 @@ fastlane/screenshots
 
 # JSON files
 city.list.min.json
+
+# DB Files
+default.realm
+default.realm.lock
+realm-object-server/

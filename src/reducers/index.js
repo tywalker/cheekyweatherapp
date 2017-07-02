@@ -44,7 +44,7 @@ const cities = (state = [], action) => {
         })
     case 'QUERY_CITIES':
       // using state.text we can create a action to query the cities
-      
+
       return
     case 'DISPLAY_CITIES':
       // using state.text we can create a action to query the cities
