@@ -6,36 +6,56 @@ import {
   View
 } from 'react-native';
 import { connect } from 'react-redux';
-import { searchText, gimmeLogs } from '../actions/index'
+import { searchText, queryCities } from '../actions/index'
 
-let SearchText = ( { dispatch } ) => {
-  let startTyping = function() {
-      timeTextChange = setTimeout(startTyping, 400);
+const SearchText = ( { searchText, cities, queryCities } ) => {
+  let startTyping = text => {
+    if (text) {
+      queryCities(text);
+    } else {
+      return false;
+    }
+    //console.warn(queryText);
+    timeTextChange = setTimeout(startTyping, 400);
   };
 
   let resetTimer = function(text) {
-      clearTimeout(window.timeTextChange);
-      timeTextChange = setTimeout(startTyping, 400);
+    clearTimeout(window.timeTextChange);
+    timeTextChange = setTimeout( () => { startTyping(text) }, 400);
   };
 
   const initTimer = () => {
-    console.log('timer initiated')
-    timeTextChange = setTimeout(startTyping, 400);
+    timeTextChange = setTimeout( () => { startTyping() }, 400);
   }
 
   return (
     <View>
-      <TextInput onChangeText={ text => resetTimer() }
+      <TextInput onChangeText={ text => resetTimer(text) }
                  onSubmitEditing={ () => { true } }
                  editable={ true }
                  onFocus={ () => initTimer() }/>
-      <TouchableNativeFeedback onPress={ () => dispatch(gimmeLogs('')) } >
-        <Text>Press me to see something crazy!</Text>
+      <TouchableNativeFeedback onPress={ () => searchText('example') }>
+        <Text>Press Me</Text>
       </TouchableNativeFeedback>
+      <Text>{ cities.textToSearch }</Text>
     </View>
   );
 }
 
-SearchText = connect()(SearchText);
+const mapStateToProps = state => {
+  console.warn(JSON.stringify(state));
+  return {
+    cities: state.cities
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    searchText: text => { dispatch(searchText(text)) },
+    queryCities: text => { dispatch(queryCities(text)) }
+  }
+}
+
+SearchText = connect(mapStateToProps, mapDispatchToProps)(SearchText);
 
 export default SearchText;

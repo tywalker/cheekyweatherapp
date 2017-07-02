@@ -1,3 +1,7 @@
+const realm = require('../../db/schema')
+let citiesObj = realm.objects('City');
+let citiesSorted = citiesObj.sorted('name');
+
 export const addForecast = text => {
   return {
     type: 'ADD_FORECAST',
@@ -34,10 +38,16 @@ export const searchText = text => {
 }
 
 
-export const queryCities = text => {
-  return {
-    type: 'QUERY_CITIES',
-    text
+export const queryCities = async (text) => {
+//  let payload = citiesSorted.filtered(text);
+  try {
+    let data = await citiesSorted.filtered(`name = "Raleigh"`)
+    return {
+      type: 'QUERY_CITIES',
+      data
+    }
+  } catch (err) {
+    console.warn(err);
   }
 }
 

@@ -1,3 +1,7 @@
+const realm = require('../../db/schema')
+let citiesObj = realm.objects('City');
+let citiesSorted = citiesObj.sorted('name');
+
 import { combineReducers } from 'redux';
 import { addWeather, addCity } from '../actions'
 
@@ -40,15 +44,15 @@ const cities = (state = [], action) => {
       ]
     case 'SEARCH_TEXT':
       return Object.assign({}, state, {
-          text: action.text
-        })
+        textToSearch: action.text,
+      })
     case 'QUERY_CITIES':
       // using state.text we can create a action to query the cities
-
-      return
+      return Object.assign({}, state, {
+        payload: action.data,
+      })
     case 'DISPLAY_CITIES':
-      // using state.text we can create a action to query the cities
-      return
+      return state.payload
     default:
       return state
   }
