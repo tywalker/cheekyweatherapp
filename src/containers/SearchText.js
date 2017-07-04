@@ -6,16 +6,17 @@ import {
   View
 } from 'react-native';
 import { connect } from 'react-redux';
-import { searchText, queryCities } from '../actions/index'
+import { searchText, sayHello } from '../actions/index'
 
-const SearchText = ( { searchText, cities, queryCities } ) => {
+import createSagaMiddleware from 'redux-saga';
+
+const SearchText = ( { searchText, cities, sayHello } ) => {
   let startTyping = text => {
     if (text) {
-      queryCities(text);
+      sayHello();
     } else {
       return false;
     }
-    //console.warn(queryText);
     timeTextChange = setTimeout(startTyping, 400);
   };
 
@@ -43,7 +44,6 @@ const SearchText = ( { searchText, cities, queryCities } ) => {
 }
 
 const mapStateToProps = state => {
-  console.warn(JSON.stringify(state));
   return {
     cities: state.cities
   }
@@ -52,7 +52,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     searchText: text => { dispatch(searchText(text)) },
-    queryCities: text => { dispatch(queryCities(text)) }
+    sayHello: () => { dispatch(sayHello()) }
   }
 }
 

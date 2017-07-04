@@ -3,9 +3,9 @@ let citiesObj = realm.objects('City');
 let citiesSorted = citiesObj.sorted('name');
 
 import { combineReducers } from 'redux';
-import { addWeather, addCity } from '../actions'
+import { addWeather, addCity, SAY_HELLO } from '../actions'
 
-function forecasts(state = [], action) {
+export const forecasts = (state = [], action) => {
   switch (action.type) {
     case 'ADD_FORECAST':
       return [
@@ -33,7 +33,7 @@ function forecasts(state = [], action) {
       return state;
   }
 }
-const cities = (state = [], action) => {
+export const cities = (state = [], action) => {
   switch (action.type) {
     case 'ADD_CITY':
       return [
@@ -51,8 +51,8 @@ const cities = (state = [], action) => {
       return Object.assign({}, state, {
         payload: action.data,
       })
-    case 'DISPLAY_CITIES':
-      return state.payload
+    case SAY_HELLO:
+      alert('hello everyone')
     default:
       return state
   }
@@ -60,7 +60,7 @@ const cities = (state = [], action) => {
 
 const weatherApp = combineReducers({
   forecasts,
-  cities
+  cities,
 });
 
 export default weatherApp

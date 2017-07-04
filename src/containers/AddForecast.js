@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { addForecast } from '../actions/index';
 
 let AddForecast = ( { dispatch } ) => {
-  let warn = console.log('warning, warning, warning');
   return (
     <View>
       <Text>This is the AddForecast continaer</Text>
