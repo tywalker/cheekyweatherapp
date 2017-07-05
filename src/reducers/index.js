@@ -1,58 +1,20 @@
 import { combineReducers } from 'redux';
-import { addWeather, addCity } from '../actions'
+import { RECEIVE_CITIES } from '../actions'
 
-function forecasts(state = [], action) {
+function cities(state = { cities: [] }, action) {
   switch (action.type) {
-    case 'ADD_FORECAST':
-      return [
+    case RECEIVE_CITIES:
+      return {
         ...state,
-        {
-          condition: action.text,
+        cities: action.cities
         }
-      ]
-    case 'SHOW_FORECAST':
-      return [
-        ...state,
-        {
-          forecast: state.map(
-            (forecast, index) => {
-              if (index === action.index) {
-                return forecast[index];
-              }
-            })
-        }
-      ]
-    case 'REMOVE_FORECAST':
-      state = state.filter( (forecast, index) => index !== action.index )
-      return state;
-    default:
-      return state;
-  }
-}
-const cities = (state = [], action) => {
-  switch (action.type) {
-    case 'ADD_CITY':
-      return [
-        ...state,
-        {
-          city: action.type
-        }
-      ]
-    case 'SEARCH_TEXT':
-      return [
-        ...state,
-        {
-          searchText: action.text
-        }
-      ]
-    default:
-      return state
+      default:
+        return state
   }
 }
 
-const weatherApp = combineReducers({
-  forecasts,
-  cities
+const rootReducer = combineReducers({
+  cities,
 });
 
-export default weatherApp
+export default rootReducer

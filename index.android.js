@@ -8,28 +8,28 @@ import React, { Component } from 'react';
 import {
   AppRegistry,
   StyleSheet,
-  Text,
-  View
 } from 'react-native';
-import { Provider } from 'react-redux';
-import { createStore } from 'redux'
-import PropTypes from 'prop-types';
 
-// actions
-import { addForecast, addCity } from './src/actions';
-// reducers
-import weatherApp from './src/reducers/index';
-// import stylesheets
-import indexStyles from './src/styles/index';
+import { Provider } from 'react-redux';
+import { applyMiddleware, createStore, combineReducers } from 'redux';
+
+import createSagaMiddleware from 'redux-saga';
+import rootSaga from './src/sagas/sagas';
+import rootReducer from './src/reducers';
+
 // components
 import App from './src/components/app';
 
-const store = createStore(weatherApp);
-// console.log(store.getState())
-// let unsubscribe = store.subscribe(() => {
-//   console.log(store.getState());
-// });
-//
+// create saga middleware
+const sagaMiddleware = createSagaMiddleware();
+// Mount it on the store
+const store = createStore(
+  rootReducer,
+  applyMiddleware(sagaMiddleware)
+);
+
+sagaMiddleware.run(rootSaga);
+
 const CheekyWeatherApp = () => (
   <Provider store={ store }>
     <App />

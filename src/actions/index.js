@@ -1,34 +1,16 @@
-export const addForecast = text => {
+export const GET_ALL_CITIES = 'GET_ALL_CITIES'
+export const RECEIVE_CITIES = 'RECEIVE_CITIES'
+
+
+export function getAllCities() {
   return {
-    type: 'ADD_FORECAST',
-    text
+    type: GET_ALL_CITIES
   }
 }
 
-export const showForecast = index => {
+export function receiveCities(cities) {
   return {
-    type: 'SHOW_FORECAST',
-    index
-  }
-}
-
-export const removeForecast = index => {
-  return {
-    type: 'REMOVE_FORECAST',
-    index
-  }
-}
-
-export const addCity = text => {
-  return {
-    type: 'ADD_CITY',
-    text
-  }
-}
-
-export const searchText = text => {
-  return {
-    type: 'SEARCH_TEXT',
-    text
+    type: RECEIVE_CITIES,
+    cities
   }
 }
