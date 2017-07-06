@@ -1,34 +1,25 @@
-export const addForecast = text => {
+export const GET_SEARCH_TEXT = 'GET_SEARCH_TEXT'
+export const GET_CITIES_BY_SEARCH = 'GET_CITIES_BY_SEARCH'
+export const RECEIVE_CITIES = 'RECEIVE_CITIES'
+
+export function getSearchText(text) {
   return {
-    type: 'ADD_FORECAST',
+    type: GET_SEARCH_TEXT,
+    isFetching: true,
     text
   }
 }
 
-export const showForecast = index => {
+export function getCitiesBySearch() {
   return {
-    type: 'SHOW_FORECAST',
-    index
+    type: GET_CITIES_BY_SEARCH,
   }
 }
 
-export const removeForecast = index => {
+export function receiveCities(cities) {
   return {
-    type: 'REMOVE_FORECAST',
-    index
-  }
-}
-
-export const addCity = text => {
-  return {
-    type: 'ADD_CITY',
-    text
-  }
-}
-
-export const searchText = text => {
-  return {
-    type: 'SEARCH_TEXT',
-    text
+    type: RECEIVE_CITIES,
+    isFetching: true,
+    cities
   }
 }

@@ -17,24 +17,13 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 // components
 import SearchCity from './searchcity';
-
-// actions
-import { addForecast, addCity } from '../actions';
-// reducers
-import weatherApp from '../reducers/index';
-// containers
-import AddForecast from '../containers/AddForecast';
-import ForecastsList from '../containers/ShowForecasts';
 // import stylesheets
 import indexStyles from '../styles/index';
 
-const store = createStore(weatherApp);
 const App = () => {
   return (
     <View>
       <Text>Hello World. This is the App component</Text>
-      <AddForecast />
-      <ForecastsList />
       <SearchCity />
     </View>
   );
