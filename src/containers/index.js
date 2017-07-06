@@ -19,11 +19,10 @@ class Cities extends Component {
   startTyping = text => {
     if (text) {
       this.props.dispatch(getSearchText(text))
-      this.props.dispatch(getCitiesBySearch());
-      // if (this.props.text) {
-      //   this.props.dispatch(getCitiesBySearch(this.props.text));
-      // }
-      // this._hasFired = true;
+      if (this.props.text) {
+        this.props.dispatch(getCitiesBySearch());
+      }
+      this._hasFired = true;
       // console.warn(this.props.text)
       //this.props.dispatch(getCitiesBySearch(text));
     }
