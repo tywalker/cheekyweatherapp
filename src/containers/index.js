@@ -13,11 +13,18 @@ class Cities extends Component {
     super(props)
 
     this._renderCities = this._renderCities.bind(this)
+    this._hasFired = null;
   }
 
   startTyping = text => {
     if (text) {
       this.props.dispatch(getSearchText(text))
+      this.props.dispatch(getCitiesBySearch());
+      // if (this.props.text) {
+      //   this.props.dispatch(getCitiesBySearch(this.props.text));
+      // }
+      // this._hasFired = true;
+      // console.warn(this.props.text)
       //this.props.dispatch(getCitiesBySearch(text));
     }
     timeTextChange = setTimeout(this.startTyping, 400);
@@ -45,11 +52,9 @@ class Cities extends Component {
   render() {
     let renderCities;
 
-    if (this.props.isFetching) {
-      console.log(this.props.isFetching)
+    if (this._hasFired) {
       renderCities = this._renderCities();
     } else {
-      console.log(this.props.isFetching)
       renderCities = null
     }
 
@@ -69,7 +74,7 @@ function mapStateToProps(state) {
   return {
     isFetching: state.cities.isFetching,
     cities: state.cities.payload,
-    searchText: state.cities.searchText
+    text: state.cities.text
   }
 }
 

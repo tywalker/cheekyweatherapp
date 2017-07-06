@@ -10,10 +10,9 @@ export function getSearchText(text) {
   }
 }
 
-export function getCitiesBySearch(text) {
+export function getCitiesBySearch() {
   return {
     type: GET_CITIES_BY_SEARCH,
-    text
   }
 }
 

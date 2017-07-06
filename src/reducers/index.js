@@ -7,14 +7,21 @@ function cities(state = { cities: [] }, action) {
       return {
         ...state,
         isFetching: true,
-        searchText: action.text
+        text: action.text
       }
     case RECEIVE_CITIES:
-      return {
-        ...state,
-        isFetching: false,
-        payload: action.cities
+      if (state.text) {
+        return {
+          ...state,
+          isFetching: false,
+          payload: action.cities
         }
+      } else {
+        return {
+          ...state,
+          payload: action.cities
+        }
+      }
       default:
         return state
   }
