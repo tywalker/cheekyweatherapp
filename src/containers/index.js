@@ -6,25 +6,19 @@ import {
 } from 'react-native';
 
 import { connect } from 'react-redux';
-import { receiveCities, getAllCities } from '../actions'
+import { receiveCities, getCitiesBySearch, getSearchText } from '../actions'
 
 class Cities extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      fired: false
-    }
 
     this._renderCities = this._renderCities.bind(this)
   }
 
   startTyping = text => {
     if (text) {
-      this.props.dispatch(getAllCities())
-      console.warn(JSON.stringify(this.props.cities.cities.place[0].name))
-      this.setState({
-        fired: true
-      })
+      this.props.dispatch(getSearchText(text))
+      //this.props.dispatch(getCitiesBySearch(text));
     }
     timeTextChange = setTimeout(this.startTyping, 400);
   };
@@ -41,10 +35,9 @@ class Cities extends Component {
   _renderCities() {
     return (
       <View>
-        { this.props.cities.cities.place.map( (city, index) => 
+        { this.props.cities.place.map( (city, index) =>
           <Text key={ index }>{ city.name }</Text>
         )}
-        <Text>{ this.props.cities.cities.place[0].name }</Text>
       </View>
     )
   }
@@ -52,11 +45,14 @@ class Cities extends Component {
   render() {
     let renderCities;
 
-    if (this.state.fired) {
+    if (this.props.isFetching) {
+      console.log(this.props.isFetching)
       renderCities = this._renderCities();
     } else {
+      console.log(this.props.isFetching)
       renderCities = null
     }
+
     return (
       <View>
         <TextInput onChangeText={ text => this.resetTimer(text) }
@@ -71,7 +67,9 @@ class Cities extends Component {
 
 function mapStateToProps(state) {
   return {
-    cities: state.cities
+    isFetching: state.cities.isFetching,
+    cities: state.cities.payload,
+    searchText: state.cities.searchText
   }
 }
 
