@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import { RECEIVE_CITIES, GET_SEARCH_TEXT } from '../actions'
 
-function cities(state = { cities: [] }, action) {
+function cities(state = { payload: [] }, action) {
   switch (action.type) {
     case GET_SEARCH_TEXT:
       return {
@@ -14,12 +14,12 @@ function cities(state = { cities: [] }, action) {
         return {
           ...state,
           isFetching: false,
-          payload: action.cities
+          payload: action.cities.place
         }
       } else {
         return {
           ...state,
-          payload: action.cities
+          payload: "no results"
         }
       }
       default:

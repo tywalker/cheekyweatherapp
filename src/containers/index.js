@@ -11,8 +11,7 @@ import { receiveCities, getCitiesBySearch, getSearchText } from '../actions'
 class Cities extends Component {
   constructor(props) {
     super(props)
-
-    this._renderCities = this._renderCities.bind(this)
+    const { cities } = this.props
     this._hasFired = null;
   }
 
@@ -41,17 +40,18 @@ class Cities extends Component {
   _renderCities() {
     return (
       <View>
-        { this.props.cities.place.map( (city, index) =>
-          <Text key={ index }>{ city.name }</Text>
-        )}
+        {
+          this.props.cities.map( item => {
+            return <Text>{ item.name }</Text>
+          })
+        }
       </View>
     )
   }
 
   render() {
     let renderCities;
-
-    if (this._hasFired) {
+    if (this._hasFired && typeof this.props.cities !== 'undefined') {
       renderCities = this._renderCities();
     } else {
       renderCities = null
