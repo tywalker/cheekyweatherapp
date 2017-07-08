@@ -88,5 +88,3 @@ function mapStateToProps(state) {
     text: state.cities.text
   }
 }
-
-export default connect(mapStateToProps)(Cities);

@@ -1,4 +1,4 @@
-import { call, put, fork, all, select, takeEvery } from 'redux-saga/effects'
+import { call, put, fork, all, select, takeEvery, takeLatest } from 'redux-saga/effects'
 import * as actions from '../actions'
 
 async function fetchCities(queryText) {
@@ -17,19 +17,35 @@ async function fetchCities(queryText) {
   }
 }
 
+function fetchGeoCoords() {
+  navigator.geolocation.getCurrentPosition( position => {
+    return position.coords
+  })
+}
+
 export function* getCitiesBySearch() {
   const searchText = yield select()
   const cities = yield call(fetchCities, [searchText])
   yield put(actions.receiveCities(cities))
 }
 
+export function* getGeoCoords() {
+  const state = yield select()
+  if (state.user.fetching) {
+    const position = yield call(navigator.geolocation.getCurrentPosition( position => position.coords ))
+    yield put(actions.getGeoCoords(position))
+  }
+}
+
 // watcher sagas
 // spawns a new task on each action
 export function* startUp() {
   yield takeEvery("GET_CITIES_BY_SEARCH", getCitiesBySearch)
+  yield takeLatest("GET_GEO_COORDS", getGeoCoords)
 }
 
 export default function* rootSaga() {
   yield fork(startUp)
   yield fork(getCitiesBySearch)
+  yield fork(getGeoCoords)
 }

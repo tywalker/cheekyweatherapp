@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { RECEIVE_CITIES, GET_SEARCH_TEXT, ADD_CITY } from '../actions'
+import { RECEIVE_CITIES, GET_SEARCH_TEXT, ADD_CITY, GET_GEO_COORDS } from '../actions'
 
 function cities(state = { payload: [] }, action) {
   switch (action.type) {
@@ -27,12 +27,18 @@ function cities(state = { payload: [] }, action) {
   }
 }
 
-function user(state = [], action) {
+function user(state = { fetching: true }, action) {
   switch (action.type) {
     case ADD_CITY:
       return {
         ...state,
         cities: action.city,
+      }
+    case GET_GEO_COORDS:
+      return {
+        ...state,
+        geoCoords: action.geoCoords,
+        fetching: false,
       }
     default:
       return state
@@ -41,7 +47,7 @@ function user(state = [], action) {
 
 const rootReducer = combineReducers({
   cities,
-  user
+  user,
 });
 
 export default rootReducer

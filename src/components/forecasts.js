@@ -10,7 +10,7 @@ import {
   View
 } from 'react-native';
 
-import ShowForecast from '../containers/showforecast';
+import ShowForecast from '../containers/ShowForecast';
 
 const Forecasts = ( props ) => {
   return (

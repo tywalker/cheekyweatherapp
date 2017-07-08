@@ -29,20 +29,29 @@ export function receiveCities(cities) {
 }
 
 export function addCity(city) {
-  type: ADD_CITY,
-  city
+  return {
+    type: ADD_CITY,
+    city
+  }
 }
 
 export function getGeoCoords(geoCoords) {
-  type: GET_GEO_COORDS,
-  geoCoords
+  return {
+    type: GET_GEO_COORDS,
+    fetching: true,
+    geoCoords
+  }
 }
 
 export function fetchForecast(forecast) {
-  type: FETCH_FORECAST,
-  forecast
+  return {
+    type: FETCH_FORECAST,
+    forecast
+  }
 }
 
-export function showForecast(geoLoc) {
-  type: SHOW_FORECAST
+export function showForecast() {
+  return {
+    type: SHOW_FORECAST
+  }
 }

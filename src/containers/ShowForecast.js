@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {
+  Geolocation,
   Text,
   TextInput,
   TouchableNativeFeedback,
@@ -9,13 +10,15 @@ import {
 import { connect } from 'react-redux';
 import { getGeoCoords, fetchForecast, showforecast } from '../actions'
 
-class Cities extends Component {
+class ShowForecast extends Component {
   constructor(props) {
     super(props)
     const { cities } = this.props
     this._hasFired = null;
   }
-
+  componentDidMount() {
+    console.warn('mounted')
+  }
 
   render() {
     return (
@@ -27,11 +30,11 @@ class Cities extends Component {
 }
 
 function mapStateToProps(state) {
+  console.warn(JSON.stringify(state))
   return {
-    isFetching: state.cities.isFetching,
-    cities: state.cities.payload,
-    text: state.cities.text
+    longitude: state.user.geoCoords,
+    latitude: state.user.geoCoords
   }
 }
 
-export default connect(mapStateToProps)(Cities);
+export default connect(mapStateToProps)(ShowForecast);
