@@ -8,60 +8,25 @@ import React, { Component } from 'react';
 import {
   AppRegistry,
   StyleSheet,
-  Text,
-  View
 } from 'react-native';
+
+import App from './src/components/app'
 import { Provider } from 'react-redux';
-import { createStore } from 'redux'
-// import stylesheets
-import indexStyles from './src/styles/index';
-// components
-import HomeView from './src/homeview';
-import SearchCity from './src/components/searchcity';
+import PropTypes from 'prop-types';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import rootReducer from './src/reducers';
 
-export default class CheekyWeatherApp extends Component {
-  constructor() {
-    super();
+// Note: this API requires redux@>=3.1.0
+const store = createStore(
+  rootReducer,
+  applyMiddleware(thunk)
+);
 
-    this._url = 'http://api.openweathermap.org/data/2.5/weather?id=4487042&appid=a8b071b027a6f5c5f2da92477aac2b63';
-    this.state = {
-      payload: null,
-      payloadChange: true,
-      testing: 'TestingOnMount',
-    };
-
-    setInterval(() => {
-      return fetch(this._url)
-        .then((response) => response.json())
-        .then((responseJson) => {
-          // determine payload updates
-          this.setState(previousState => {
-            return { payloadChange: !previousState.payload };
-          });
-
-          // if the payload changes update.
-          if (this.state.payloadChange) {
-            this.setState({
-              payload: responseJson
-            });
-            console.warn('updated');
-          }
-        })
-        .catch((error) => {
-          console.warn(error);
-        });
-      }, 5000);
-    }
-
-  render() {
-    return (
-      <View>
-       { console.warn(JSON.stringify(this.state.payload)) }
-        <HomeView />
-        <SearchCity payload={ this.state.payload }/>
-      </View>
-    );
-  }
-}
+const CheekyWeatherApp = () => (
+  <Provider store={ store }>
+    <App />
+  </Provider>
+)
 
 AppRegistry.registerComponent('CheekyWeatherApp', () => CheekyWeatherApp);

@@ -10,12 +10,14 @@ import {
   View
 } from 'react-native';
 
+import Cities from '../containers/index';
+
 const SearchCity = ( props ) => {
   return (
     <View>
-      <Text> SearchCity/ </Text>
+      <Cities />
     </View>
-  );
+  )
 }
 
 export default SearchCity;
