@@ -2,8 +2,10 @@ export const GET_SEARCH_TEXT = 'GET_SEARCH_TEXT'
 export const GET_CITIES_BY_SEARCH = 'GET_CITIES_BY_SEARCH'
 export const RECEIVE_CITIES = 'RECEIVE_CITIES'
 export const ADD_CITY = 'ADD_CITY'
-export const GEO_SUCCESS = 'GEO_SUCCCESS'
-export const FORECAST_SUCCESS = 'FORECAST_SUCESS'
+export const GEO_FETCH = 'GEO_FETCH'
+export const GEO_SUCCESS = 'GEO_SUCCESS'
+export const FORECAST_FETCH = 'FORECAST_FETCH'
+export const FORECAST_SUCCESS = 'FORECAST_SUCCESS'
 
 
 export const searchText = text => {
@@ -35,37 +37,53 @@ export function receiveCities(cities) {
   }
 }
 
-export const addCity = text => {
+export function addCity(city) {
   return {
     type: ADD_CITY,
-    text
+    city
   }
 }
 
-export const geoFetch = (coords) => {
+export const geoSuccess = coords => {
   return {
-    type: GEO_SUCCCESS,
+    type: GEO_FETCH,
     fetching: true,
     coords
   }
 }
 
-export function geoSuccess() {
-  return function(dispatch) {
-    return navigator.geolocation.getCurrentPosition(position => dispatch(geoFetch(position.coords)));
-  }
-}
-
-export const forecastFetch = latLng = {
+export const forecastSuccess = forecast => {
   return {
-    type: FORECAST_SUCESS,
+    type: FORECAST_FETCH,
     fetching: true,
-    latLng
+    forecast
   }
 }
 
-export function forecastSuccess() {
+export function geoFetch() {
   return function(dispatch) {
-    return true
+    // gets phone gps coords
+    return navigator.geolocation.getCurrentPosition(position => dispatch(geoSuccess(position.coords)));
+  }
+}
+
+export function forecastFetch() {
+  return function(dispatch, getState) {
+    const state = getState()
+    if (!state.geolocation.fetching) {
+      let lat = state.geolocation.coords.latitude;
+      let lon = state.geolocation.coords.longitude;
+
+      // API call to openweathermap.org with lat and lng to get a single forecast.
+      const url = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=a8b071b027a6f5c5f2da92477aac2b63`
+      return fetch(url)
+        .then((response) => response.json())
+        .then((responseJson) => {
+          dispatch(forecastSuccess(responseJson));
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   }
 }

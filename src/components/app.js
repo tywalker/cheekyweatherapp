@@ -4,6 +4,7 @@
  * @flow
  */
 
+
 import React, { Component } from 'react';
 import {
   AppRegistry,
@@ -24,8 +25,7 @@ import { addForecast, addCity } from '../actions';
 // reducers
 import weatherApp from '../reducers/index';
 // containers
-import AddForecast from '../containers/AddForecast';
-import ForecastsList from '../containers/ShowForecasts';
+import ForecastsList from '../containers/ShowForecast';
 
 // import stylesheets
 import indexStyles from '../styles/index';
