@@ -25,6 +25,7 @@ class ShowForecast extends Component {
     if (this.props.forecasts.fetching) {
       this.props.dispatch(forecastFetch())
     }
+      console.log(this.props.forecasts)
   }
 
   _renderLat() {

@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { addWeather, addCity, geoFetch } from '../actions'
+import { addWeather, addCity, geoFetch, forecastFetch } from '../actions'
 
 function cities(state = [], action) {
   switch (action.type) {
@@ -43,7 +43,7 @@ function forecasts(state = {forecast: {}, fetching: true}, action) {
   switch (action.type) {
     case 'FORECAST_FETCH':
       return {
-          forecasts: action.forecast,
+          forecast: action.forecast,
           fetching: false
         }
     default:

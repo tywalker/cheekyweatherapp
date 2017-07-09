@@ -62,6 +62,7 @@ export const forecastSuccess = forecast => {
 
 export function geoFetch() {
   return function(dispatch) {
+    // gets phone gps coords
     return navigator.geolocation.getCurrentPosition(position => dispatch(geoSuccess(position.coords)));
   }
 }
@@ -70,10 +71,10 @@ export function forecastFetch() {
   return function(dispatch, getState) {
     const state = getState()
     if (!state.geolocation.fetching) {
-      console.log(state)
       let lat = state.geolocation.coords.latitude;
       let lon = state.geolocation.coords.longitude;
-      //const searchCityUrl = `api.openweathermap.org/data/2.5/find?q=${city}&type=like&mode=xmlq=&appid=a8b071b027a6f5c5f2da92477aac2b63`
+
+      // API call to openweathermap.org with lat and lng to get a single forecast.
       const url = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=a8b071b027a6f5c5f2da92477aac2b63`
       return fetch(url)
         .then((response) => response.json())
@@ -83,12 +84,6 @@ export function forecastFetch() {
         .catch((error) => {
           console.log(error);
         });
-    } else if (!state.forecasts.fetching){
-      console.warn('fetching is not true for forecasts')
     }
-    else {
-      console.warn('fetching is true for geo')
-    }
-
   }
 }
