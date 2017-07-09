@@ -11,25 +11,19 @@ import {
   Text,
   View
 } from 'react-native';
+import App from './src/components/app'
 import { Provider } from 'react-redux';
-import { createStore } from 'redux'
 import PropTypes from 'prop-types';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import rootReducer from './src/reducers';
 
-// actions
-import { addForecast, addCity } from './src/actions';
-// reducers
-import weatherApp from './src/reducers/index';
-// import stylesheets
-import indexStyles from './src/styles/index';
-// components
-import App from './src/components/app';
+// Note: this API requires redux@>=3.1.0
+const store = createStore(
+  rootReducer,
+  applyMiddleware(thunk)
+);
 
-const store = createStore(weatherApp);
-// console.log(store.getState())
-// let unsubscribe = store.subscribe(() => {
-//   console.log(store.getState());
-// });
-//
 const CheekyWeatherApp = () => (
   <Provider store={ store }>
     <App />

@@ -26,6 +26,13 @@ export const addCity = text => {
   }
 }
 
+export const geoSuccess = (coords) => {
+  return {
+    type: 'GEO_SUCCCESS',
+    coords
+  }
+}
+
 export const searchText = text => {
   return {
     type: 'SEARCH_TEXT',
