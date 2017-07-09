@@ -32,7 +32,12 @@ class ShowForecast extends Component {
 
   _renderLat() {
     if (!this.props.geolocation.fetching) {
-      return (<Text>{ this.props.geolocation[0].coords.latitude }</Text>)
+      return (
+        <View>
+          <Text>{ this.props.geolocation[0].coords.latitude }</Text>
+          <Text>{ this.props.geolocation[0].coords.longitude }</Text>
+        </View>
+      )
     } else {
       return (<Text>No Results</Text>)
     }
@@ -41,8 +46,8 @@ class ShowForecast extends Component {
   render() {
     let lat = this._renderLat()
     return (
-      <View>
-        <Text onPress={ () => this.props.dispatch(geoSuccess()) }> Jesus. </Text>
+      <View style={{ height: 100, width: '100%', backgroundColor: '#eee' }} onPress={ () => console.warn('working') }>
+        <Text> Jesus. Mother. Mary. Joseph </Text>
         { lat }
       </View>
     );
