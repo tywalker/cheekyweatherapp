@@ -18,38 +18,38 @@ class ShowForecast extends Component {
   }
 
   componentWillMount() {
-    this.props.dispatch(forecastFetch())
+    this.props.dispatch(geoFetch())
   }
 
   componentDidUpdate() {
     if (this.props.forecasts.fetching) {
       this.props.dispatch(forecastFetch())
     }
-      console.log(this.props.forecasts)
   }
 
-  _renderLat() {
-    if (!this.props.geolocation.fetching) {
+  _renderWeather() {
+    if (!this.props.forecasts.fetching) {
       return (
         <View>
-          <Text>{ this.props.geolocation.coords.latitude }</Text>
-          <Text>{ this.props.geolocation.coords.longitude }</Text>
+          { console.warn(this.props.forecasts) }
+          <Text>{ this.props.forecasts.forecast.name }</Text>
+          <Text>{ this.props.forecasts.forecast.weather[0].description }</Text>
+          <Text>{ this.props.forecasts.forecast.main.temp }</Text>
         </View>
       )
     } else {
-      return (<Text>No Results</Text>)
+      return <Text>No Results</Text>
     }
   }
 
   render() {
-    let lat = this._renderLat()
+    let renderWeather = this._renderWeather()
     return (
-      <TouchableNativeFeedback onPress={ () => this.props.dispatch(geoFetch())}>
       <View style={{ height: 100, width: '100%', backgroundColor: '#eee' }} >
-        <Text> Jesus. Mother. Mary. Joseph </Text>
-        { lat }
+        <Text>Welcome to my weather app.</Text>
+        <Text> It's fucking weathering outside.</Text>
+        { renderWeather }
       </View>
-      </TouchableNativeFeedback>
     );
   }
 }
