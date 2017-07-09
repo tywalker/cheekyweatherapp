@@ -8,29 +8,48 @@ import {
 } from 'react-native';
 
 import { connect } from 'react-redux';
-import { getGeoCoords, fetchForecast, showforecast } from '../actions'
+import { fetchGeoCoords, fetchForecast, showforecast } from '../actions'
 
 class ShowForecast extends Component {
   constructor(props) {
     super(props)
-    const { cities } = this.props
-    this._hasFired = null;
+
+    this._longitude;
+    this._latitude;
   }
-  componentDidMount() {
-    console.warn('mounted')
+  componentWillMount() {
+    this.props.dispatch(fetchGeoCoords());
+  }
+
+  fetchCoords(interval) {
+    const fetchCoords = new Promise(resolve => {
+      navigator.geolocation.getCurrentPosition( position => position )
+    });
+    return fetchCoords;
+  }
+
+  async receiveCoords() {
+    try {
+      let position = await this.fetchCoords(5000);
+      this.setState({
+        coords: position
+      })
+    } catch(e) {
+      return e
+    }
   }
 
   render() {
     return (
       <View>
-        <Text>This is where we will show the forecast</Text>
+      <Text> Buuuuuhhhh</Text>
       </View>
     );
   }
 }
 
 function mapStateToProps(state) {
-  console.warn(JSON.stringify(state))
+  console.warn(JSON.stringify(state.user))
   return {
     longitude: state.user.geoCoords,
     latitude: state.user.geoCoords

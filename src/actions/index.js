@@ -2,7 +2,8 @@ export const GET_SEARCH_TEXT = 'GET_SEARCH_TEXT'
 export const GET_CITIES_BY_SEARCH = 'GET_CITIES_BY_SEARCH'
 export const RECEIVE_CITIES = 'RECEIVE_CITIES'
 export const ADD_CITY = 'ADD_CITY'
-export const GET_GEO_COORDS = 'GET_GEO_COORDS'
+export const FETCH_GEO_COORDS = 'FETCH_GEO_COORDS'
+export const RECEIVE_GEO_COORDS = 'RECEIVE_GEO_COORDS'
 export const FETCH_FORECAST = 'FETCH_FORECAST'
 export const SHOW_FORECAST = 'SHOW_FORECAST'
 
@@ -35,10 +36,15 @@ export function addCity(city) {
   }
 }
 
-export function getGeoCoords(geoCoords) {
+export function fetchGeoCoords() {
   return {
-    type: GET_GEO_COORDS,
-    fetching: true,
+    type: FETCH_GEO_COORDS
+  }
+}
+
+export function receiveGeoCoords(geoCoords) {
+  return {
+    type: RECEIVE_GEO_COORDS,
     geoCoords
   }
 }

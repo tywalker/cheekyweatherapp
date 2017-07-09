@@ -12,7 +12,7 @@ import {
   View
 } from 'react-native';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux'
+import { createStore, compose } from 'redux'
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 // components
