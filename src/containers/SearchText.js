@@ -2,22 +2,35 @@ import React, { Component } from 'react';
 import {
   Text,
   TextInput,
-  TouchableNativeFeedback,
   View
 } from 'react-native';
 import { connect } from 'react-redux';
-import { addForecast } from '../actions';
 import { searchText } from '../actions'
 
-let SearchText = ( { dispatch } ) => {
-  let warn = console.log('warning, warning, warning');
-  return (
-    <View>
-      <TextInput onChangeText={ (text) => dispatch.searchText(text) } />
-    </View>
-  );
+class Cities extends Component {
+
+  startTyping = text => {
+    timeTextChange = setTimeout(this.startTyping, 10);
+  };
+
+  resetTimer = function(text) {
+    clearTimeout(window.timeTextChange);
+    timeTextChange = setTimeout( () => { this.startTyping(text) }, 10);
+  };
+
+  initTimer = () => {
+    timeTextChange = setTimeout( () => { this.startTyping() }, 10);
+  }
+
+  render() {
+    return (
+      <View>
+        <TextInput onChangeText={ text => this.resetTimer(text) }
+                   onSubmitEditing={ text => sayHello(text) }
+                   editable={ true }
+                   onFocus={ () => this.initTimer() }/>
+      </View>
+    );
+  }
 }
-
-SearchText = connect()(SearchText);
-
 export default SearchText;

@@ -26,10 +26,10 @@ import weatherApp from '../reducers/index';
 // containers
 import AddForecast from '../containers/AddForecast';
 import ForecastsList from '../containers/ShowForecasts';
+
 // import stylesheets
 import indexStyles from '../styles/index';
 
-const store = createStore(weatherApp);
 const App = () => {
   return (
     <View>

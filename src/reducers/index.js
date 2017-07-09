@@ -3,30 +3,27 @@ import { addWeather, addCity, geoSuccess } from '../actions'
 
 function geolocation(state = [], action) {
   switch (action.type) {
-    case 'ADD_FORECAST':
-      return [
+    case GET_SEARCH_TEXT:
+      return {
         ...state,
-        {
-          condition: action.text,
+        isFetching: true,
+        text: action.text
+      }
+    case RECEIVE_CITIES:
+      if (state.text && (typeof state.payload !== 'undefined' || state.payload !== null)) {
+        return {
+          ...state,
+          isFetching: false,
+          payload: action.cities
         }
-      ]
-    case 'SHOW_FORECAST':
-      return [
-        ...state,
-        {
-          forecast: state.map(
-            (forecast, index) => {
-              if (index === action.index) {
-                return forecast[index];
-              }
-            })
+      } else {
+        return {
+          ...state,
+          payload: "no results"
         }
-      ]
-    case 'REMOVE_FORECAST':
-      state = state.filter( (forecast, index) => index !== action.index )
-      return state;
-    default:
-      return state;
+      }
+      default:
+        return state
   }
 }
 
@@ -49,4 +46,4 @@ const weatherApp = combineReducers({
   geolocation
 });
 
-export default weatherApp
+export default rootReducer
