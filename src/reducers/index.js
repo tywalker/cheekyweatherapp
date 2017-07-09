@@ -50,7 +50,6 @@ function forecasts(state = {forecast: {}, fetching: true}, action) {
       return state;
   }
 }
-
 const rootReducer = combineReducers({
   geolocation,
   forecasts
