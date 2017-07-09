@@ -26,10 +26,17 @@ export const addCity = text => {
   }
 }
 
-export const geoSuccess = (coords) => {
+export const geoFetch = (coords) => {
   return {
     type: 'GEO_SUCCCESS',
+    fetching: true,
     coords
+  }
+}
+
+export function geoSuccess() {
+  return function(dispatch) {
+    return navigator.geolocation.getCurrentPosition(position => dispatch(geoFetch(position.coords)));
   }
 }
 

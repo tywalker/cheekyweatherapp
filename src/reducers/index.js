@@ -30,13 +30,14 @@ function geolocation(state = [], action) {
   }
 }
 
-function geolocation(state = {coords: {}}, action) {
+function geolocation(state = {coords: {}, fetching: true}, action) {
   switch (action.type) {
     case 'GEO_SUCCCESS':
       return [
         ...state,
         {
-          coords: action.coords
+          coords: action.coords,
+          fetching: false,
         }
       ]
     default:

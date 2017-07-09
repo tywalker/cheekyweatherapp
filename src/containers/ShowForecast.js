@@ -17,25 +17,27 @@ class ShowForecast extends Component {
     this._coords = null;
   }
   componentDidMount() {
-    let props = this.props
-    this._handleGeoPromise(function(position) {
-      props.dispatch(geoSuccess(position))
-    })
   }
 
   componentDidUpdate() {
-    console.warn(this.props.geolocation)
+    console.warn(this.props.geolocation[0].coords.latitude)
+    console.warn(this.props.geolocation[0])
   }
 
-  async _handleGeoPromise(callback) {
-    await navigator.geolocation.getCurrentPosition(position => callback(position));
-    this.forceUpdate()
+  _renderLat() {
+    if (!this.props.geolocation.fetching) {
+      return (<Text>{ this.props.geolocation[0].coords.latitude }</Text>)
+    } else {
+      return (<Text>No Results</Text>)
+    }
   }
 
   render() {
+    let lat = this._renderLat()
     return (
       <View>
-        <Text> Jesus. </Text>
+        <Text onPress={ () => this.props.dispatch(geoSuccess()) }> Jesus. </Text>
+        { lat }
       </View>
     );
   }
