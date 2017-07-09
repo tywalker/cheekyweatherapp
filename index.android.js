@@ -10,24 +10,18 @@ import {
   StyleSheet,
 } from 'react-native';
 
+import App from './src/components/app'
 import { Provider } from 'react-redux';
-import { applyMiddleware, createStore, combineReducers } from 'redux';
-
-import createSagaMiddleware from 'redux-saga';
-import rootSaga from './src/sagas/sagas';
+import PropTypes from 'prop-types';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 import rootReducer from './src/reducers';
-// components
-import App from './src/components/app';
 
-// create saga middleware
-const sagaMiddleware = createSagaMiddleware();
-// Mount it on the store
+// Note: this API requires redux@>=3.1.0
 const store = createStore(
   rootReducer,
-  applyMiddleware(sagaMiddleware)
+  applyMiddleware(thunk)
 );
-
-sagaMiddleware.run(rootSaga);
 
 const CheekyWeatherApp = () => (
   <Provider store={ store }>

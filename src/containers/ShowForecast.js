@@ -8,51 +8,50 @@ import {
 } from 'react-native';
 
 import { connect } from 'react-redux';
-import { fetchGeoCoords, fetchForecast, showforecast } from '../actions'
+import { geoSuccess, forecastSuccess } from '../actions'
 
 class ShowForecast extends Component {
   constructor(props) {
     super(props)
 
-    this._longitude;
-    this._latitude;
+    this._coords = null;
   }
+
   componentWillMount() {
-    this.props.dispatch(fetchGeoCoords());
+    this.props.dispatch(forecastSuccess())
   }
 
-  fetchCoords(interval) {
-    const fetchCoords = new Promise(resolve => {
-      navigator.geolocation.getCurrentPosition( position => position )
-    });
-    return fetchCoords;
+  componentDidMount() {
+    this.props.dispatch(forecastSuccess())
   }
 
-  async receiveCoords() {
-    try {
-      let position = await this.fetchCoords(5000);
-      this.setState({
-        coords: position
-      })
-    } catch(e) {
-      return e
+  componentDidUpdate() {
+    console.warn(this.props.geolocation[0].coords.latitude)
+    console.warn(this.props.geolocation[0])
+  }
+
+  _renderLat() {
+    if (!this.props.geolocation.fetching) {
+      return (<Text>{ this.props.geolocation[0].coords.latitude }</Text>)
+    } else {
+      return (<Text>No Results</Text>)
     }
   }
 
   render() {
+    let lat = this._renderLat()
     return (
       <View>
-      <Text> Buuuuuhhhh</Text>
+        <Text onPress={ () => this.props.dispatch(geoSuccess()) }> Jesus. </Text>
+        { lat }
       </View>
     );
   }
 }
 
 function mapStateToProps(state) {
-  console.warn(JSON.stringify(state.user))
   return {
-    longitude: state.user.geoCoords,
-    latitude: state.user.geoCoords
+    geolocation: state.geolocation
   }
 }
 

@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
-import { RECEIVE_CITIES, GET_SEARCH_TEXT, ADD_CITY, FETCH_GEO_COORDS, RECEIVE_GEO_COORDS } from '../actions'
+import { addWeather, addCity, geoSuccess } from '../actions'
 
-function cities(state = { payload: [] }, action) {
+function cities(state = [], action) {
   switch (action.type) {
     case GET_SEARCH_TEXT:
       return {
@@ -27,31 +27,38 @@ function cities(state = { payload: [] }, action) {
   }
 }
 
-function user(state = { geoCoords:{} }, action) {
+function geolocation(state = {coords: {}, fetching: true}, action) {
   switch (action.type) {
-    case ADD_CITY:
-      return {
+    case 'GEO_SUCCESS':
+      return [
         ...state,
-        cities: action.city,
-      }
-    case FETCH_GEO_COORDS:
-      return {
-        ...state,
-      }
-    case RECEIVE_GEO_COORDS:
-      console.log('correct action ', action)
-      return {
-        ...state,
-        geoCoords: action.geoCoords,
-      }
+        {
+          coords: action.coords,
+          fetching: false,
+        }
+      ]
     default:
-      return state
+      return state;
+  }
+}
+
+function forecasts(state = {coords: {}, fetching: true}, action) {
+  switch (action.type) {
+    case 'FORECAST_SUCCESS':
+      return [
+        ...state,
+        {
+          coords: action.coords,
+          fetching: false,
+        }
+      ]
+    default:
+      return state;
   }
 }
 
 const rootReducer = combineReducers({
-  cities,
-  user,
+  geolocation
 });
 
 export default rootReducer
