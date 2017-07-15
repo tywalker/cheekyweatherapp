@@ -6,7 +6,6 @@ function cities(state = [], action) {
     case GET_SEARCH_TEXT:
       return {
         ...state,
-        isFetching: true,
         text: action.text
       }
     case RECEIVE_CITIES:
@@ -51,6 +50,7 @@ function forecasts(state = {forecast: {}, fetching: true}, action) {
   }
 }
 const rootReducer = combineReducers({
+  cities,
   geolocation,
   forecasts
 });
