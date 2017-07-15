@@ -6,7 +6,7 @@ import {
 } from 'react-native';
 
 import { connect } from 'react-redux';
-import { getSearchText } from '../actions'
+import { getSearchText, citiesFetch } from '../actions'
 
 class SearchCities extends Component {
   constructor() {
@@ -19,10 +19,7 @@ class SearchCities extends Component {
     const { dispatch } = this.props
     if (text) {
       dispatch(getSearchText(text))
-      if (this.props.text) {
-        //dispatch(getCitiesBySearch());
-      }
-      this._hasFired = true;
+      dispatch(citiesFetch(text))
     }
     timeTextChange = setTimeout(this.startTyping, 100);
   };
@@ -44,7 +41,7 @@ class SearchCities extends Component {
           this.props.cities.place.map( (item, index) => {
             return (
               <View key={ index } style={{ height: 35, width: '100%', borderBottomWidth: 1, marginTop: 25 }}>
-                <TouchableNativeFeedback style={{ width: '100%', height: 35, paddingTop: 25 }}onPress={ () => console.warn('add city') }>
+                <TouchableNativeFeedback style={{ width: '100%', height: 35, paddingTop: 25 } }onPress={ () => console.warn('add city') }>
                   <Text>{ item.name }, {item.country.content}</Text>
                 </TouchableNativeFeedback>
               </View>
@@ -88,6 +85,8 @@ function mapStateToProps(state) {
   return {
     cities: state.cities,
     searchText: state.cities.text,
+    fetching: state.cities.fetching,
+    payload: state.cities.payload,
   }
 }
 
