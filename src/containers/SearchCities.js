@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import {
+  ActivityIndicator,
   Text,
   TextInput,
+  TouchableNativeFeedback,
   View,
 } from 'react-native';
 
@@ -34,7 +36,6 @@ class SearchCities extends Component {
   }
 
   _renderCities() {
-    console.log(JSON.stringify(this.props.cities))
     return (
       <View>
         {
@@ -57,31 +58,26 @@ class SearchCities extends Component {
     if (payload.place && payload.place.length > 0) {
       return (
         <View>
-        { payload.place.map( (city, index) => <Text key={ index }>{ city.name }</Text> ) }
+          { payload.place.map( (city, index) => {
+            return (
+              <View key={ index } style={{ height: 35, width: '100%', borderBottomWidth: 1, marginTop: 25 }}>
+                <TouchableNativeFeedback style={{ width: '100%', height: 35, paddingTop: 25 } }onPress={ () => console.warn('add city') }>
+                  <Text>{ city.name }</Text>
+                </TouchableNativeFeedback>
+              </View>
+            )
+          })}
         </View>
       )
     } else {
-      return <Text>Cities</Text>
+      return <ActivityIndicator />
     }
-  }
-
-  _renderNullSet() {
-    return (
-      <View>
-        <Text>{ this.props.cities }</Text>
-      </View>
-    )
   }
 
   render() {
     const { searchText, fetching } = this.props
     let renderCities = null
     this._hasFired = false
-    // if (this._hasFired && this.props.cities.place !== null) {
-    //   renderCities = this._renderCities()
-    // } else {
-    //   renderCities = this._renderNullSet()
-    // }
     return (
       <View style={{ height: '100%', width: '100%' }}>
         <TextInput onChangeText={ text => this.resetTimer(text) }
@@ -95,7 +91,6 @@ class SearchCities extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log(state.cities.payload)
   return {
     cities: state.cities,
     searchText: state.cities.text,
