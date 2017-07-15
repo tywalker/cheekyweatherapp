@@ -1,26 +1,27 @@
 import { combineReducers } from 'redux';
-import { addWeather, addCity, geoFetch, forecastFetch } from '../actions'
+import { addWeather, addCity, geoFetch, forecastFetch, getSearchText } from '../actions'
+import { GET_SEARCH_TEXT } from '../actions'
 
-function cities(state = [], action) {
+function cities(state = { text: 'Enter Some Text' }, action) {
   switch (action.type) {
     case GET_SEARCH_TEXT:
       return {
         ...state,
         text: action.text
       }
-    case RECEIVE_CITIES:
-      if (state.text && (typeof state.payload !== 'undefined' || state.payload !== null)) {
-        return {
-          ...state,
-          isFetching: false,
-          payload: action.cities
-        }
-      } else {
-        return {
-          ...state,
-          payload: "no results"
-        }
-      }
+    // case RECEIVE_CITIES:
+    //   if (state.text && (typeof state.payload !== 'undefined' || state.payload !== null)) {
+    //     return {
+    //       ...state,
+    //       isFetching: false,
+    //       payload: action.cities
+    //     }
+    //   } else {
+    //     return {
+    //       ...state,
+    //       payload: "no results"
+    //     }
+    //   }
       default:
         return state
   }

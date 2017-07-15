@@ -1,5 +1,4 @@
 export const GET_SEARCH_TEXT = 'GET_SEARCH_TEXT'
-export const GET_CITIES_BY_SEARCH = 'GET_CITIES_BY_SEARCH'
 export const RECEIVE_CITIES = 'RECEIVE_CITIES'
 export const ADD_CITY = 'ADD_CITY'
 export const GEO_FETCH = 'GEO_FETCH'
@@ -7,25 +6,10 @@ export const GEO_SUCCESS = 'GEO_SUCCESS'
 export const FORECAST_FETCH = 'FORECAST_FETCH'
 export const FORECAST_SUCCESS = 'FORECAST_SUCCESS'
 
-
-export const searchText = text => {
-  return {
-    type: 'SEARCH_TEXT',
-    text
-  }
-}
-
-export function getSearchText(text) {
+export const getSearchText = text => {
   return {
     type: GET_SEARCH_TEXT,
-    isFetching: true,
     text
-  }
-}
-
-export function getCitiesBySearch() {
-  return {
-    type: GET_CITIES_BY_SEARCH
   }
 }
 

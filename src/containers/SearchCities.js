@@ -6,17 +6,21 @@ import {
 } from 'react-native';
 
 import { connect } from 'react-redux';
+import { getSearchText } from '../actions'
 
 class SearchCities extends Component {
   constructor() {
     super()
+
+    this._hasFired
   }
 
   startTyping = text => {
+    const { dispatch } = this.props
     if (text) {
-      this.props.dispatch(getSearchText(text))
+      dispatch(getSearchText(text))
       if (this.props.text) {
-        this.props.dispatch(getCitiesBySearch());
+        //dispatch(getCitiesBySearch());
       }
       this._hasFired = true;
     }
@@ -60,18 +64,20 @@ class SearchCities extends Component {
   }
 
   render() {
-    let renderCities;
+    const { searchText } = this.props
+    let renderCities = null
     this._hasFired = false
-    if (this._hasFired && this.props.cities.place !== null) {
-      renderCities = this._renderCities()
-    } else {
-      renderCities = this._renderNullSet()
-    }
+    // if (this._hasFired && this.props.cities.place !== null) {
+    //   renderCities = this._renderCities()
+    // } else {
+    //   renderCities = this._renderNullSet()
+    // }
     return (
       <View>
         <TextInput onChangeText={ text => this.resetTimer(text) }
                    editable={ true }
                    onFocus={ () => this.initTimer() }/>
+        <Text>{ searchText }</Text>
         { renderCities }
       </View>
     );
@@ -80,7 +86,8 @@ class SearchCities extends Component {
 
 function mapStateToProps(state) {
   return {
-    cities: state.cities
+    cities: state.cities,
+    searchText: state.cities.text,
   }
 }
 
