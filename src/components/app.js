@@ -4,6 +4,7 @@
  * @flow
  */
 
+
 import React, { Component } from 'react';
 import {
   AppRegistry,
@@ -13,29 +14,25 @@ import {
 } from 'react-native';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux'
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 // components
-import SearchCity from './searchcity';
 import Forecasts from './forecasts'
 
 // actions
-import { addForecast, addCity } from '../actions';
-// reducers
-import weatherApp from '../reducers/index';
+import { SearchCities } from '../containers/SearchCities';
 // containers
-import AddForecast from '../containers/AddForecast';
-import ForecastsList from '../containers/ShowForecasts';
 
-// import stylesheets
-import indexStyles from '../styles/index';
+export default class App extends Component {
+  constructor() {
+    super()
+  }
 
-const App = () => {
-  return (
-    <View>
-      <Text>Hello World. This is the App component</Text>
-      <Forecasts />
-    </View>
-  );
+  render() {
+    return (
+      <View>
+        <Text>Hello World. This is the App component</Text>
+        <SearchCities />
+      </View>
+    )
+  };
 }
-export default App;

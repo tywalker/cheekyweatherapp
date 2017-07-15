@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 
 import { connect } from 'react-redux';
-import { geoSuccess } from '../actions'
+import { geoFetch, forecastFetch } from '../actions'
 
 class ShowForecast extends Component {
   constructor(props) {
@@ -16,28 +16,39 @@ class ShowForecast extends Component {
 
     this._coords = null;
   }
-  componentDidMount() {
+
+  componentWillMount() {
+    this.props.dispatch(geoFetch())
   }
 
   componentDidUpdate() {
-    console.warn(this.props.geolocation[0].coords.latitude)
-    console.warn(this.props.geolocation[0])
+    if (this.props.forecasts.fetching) {
+      this.props.dispatch(forecastFetch())
+    }
   }
 
-  _renderLat() {
-    if (!this.props.geolocation.fetching) {
-      return (<Text>{ this.props.geolocation[0].coords.latitude }</Text>)
+  _renderWeather() {
+    if (!this.props.forecasts.fetching) {
+      return (
+        <View>
+          { console.warn(this.props.forecasts) }
+          <Text>{ this.props.forecasts.forecast.name }</Text>
+          <Text>{ this.props.forecasts.forecast.weather[0].description }</Text>
+          <Text>{ this.props.forecasts.forecast.main.temp }</Text>
+        </View>
+      )
     } else {
-      return (<Text>No Results</Text>)
+      return <Text>No Results</Text>
     }
   }
 
   render() {
-    let lat = this._renderLat()
+    let renderWeather = this._renderWeather()
     return (
-      <View>
-        <Text onPress={ () => this.props.dispatch(geoSuccess()) }> Jesus. </Text>
-        { lat }
+      <View style={{ height: 100, width: '100%', backgroundColor: '#eee' }} >
+        <Text>Welcome to my weather app.</Text>
+        <Text> It's fucking weathering outside.</Text>
+        { renderWeather }
       </View>
     );
   }
@@ -45,7 +56,8 @@ class ShowForecast extends Component {
 
 function mapStateToProps(state) {
   return {
-    geolocation: state.geolocation
+    geolocation: state.geolocation,
+    forecasts: state.forecasts
   }
 }
 

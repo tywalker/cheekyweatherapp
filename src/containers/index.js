@@ -65,10 +65,11 @@ class Cities extends Component {
 
   render() {
     let renderCities;
+    this._hasFired = false
     if (this._hasFired && this.props.cities.place !== null) {
-      renderCities = this._renderCities();
+      renderCities = this._renderCities()
     } else {
-      renderCities = this._renderNullSet();
+      renderCities = this._renderNullSet()
     }
     return (
       <View>
@@ -88,5 +89,3 @@ function mapStateToProps(state) {
     text: state.cities.text
   }
 }
-
-export default connect(mapStateToProps)(Cities);
