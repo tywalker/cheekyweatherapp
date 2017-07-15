@@ -2,18 +2,14 @@ import React, { Component } from 'react';
 import {
   Text,
   TextInput,
-  TouchableNativeFeedback,
-  View
+  View,
 } from 'react-native';
 
 import { connect } from 'react-redux';
-import { receiveCities, getCitiesBySearch, getSearchText } from '../actions'
 
-class Cities extends Component {
-  constructor(props) {
-    super(props)
-    const { cities } = this.props
-    this._hasFired = null;
+class SearchCities extends Component {
+  constructor() {
+    super()
   }
 
   startTyping = text => {
@@ -84,8 +80,8 @@ class Cities extends Component {
 
 function mapStateToProps(state) {
   return {
-    isFetching: state.cities.isFetching,
-    cities: state.cities.payload,
-    text: state.cities.text
+    cities: state.cities
   }
 }
+
+export default connect(mapStateToProps)(SearchCities);
