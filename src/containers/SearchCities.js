@@ -63,16 +63,14 @@ class SearchCities extends Component {
 
   _renderFailure() {
     const { payload, success } = this.props
-    if (!payload.place) {
-      return (
-        <View style={{height: 35, width: '100%', borderBottomWidth: 1, marginTop: 25}}>
-          <TouchableNativeFeedback style={{width: '100%', height: 35, paddingTop: 25} }
-                                   onPress={ () => console.warn('add city') }>
-            <Text>{ payload }</Text>
-          </TouchableNativeFeedback>
-        </View>
-      )
-    }
+    return (
+      <View style={{height: 35, width: '100%', borderBottomWidth: 1, marginTop: 25}}>
+        <TouchableNativeFeedback style={{width: '100%', height: 35, paddingTop: 25} }
+                                 onPress={ () => console.warn('add city') }>
+          <Text>{ payload }</Text>
+        </TouchableNativeFeedback>
+      </View>
+    )
   }
 
   render() {
