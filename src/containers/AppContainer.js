@@ -14,11 +14,10 @@ export default class AppContainer extends Component {
 
   render() {
     return (
-      <View style={{ height: 100, width: '100%', backgroundColor: '#eee' }} >
+      <View style={{ height: '100%', width: '100%', backgroundColor: '#eee' }} >
         <Text>Welcome to my weather app.</Text>
         <SearchCities/>
-
-      </View>
+     </View>
     )
   }
 }
