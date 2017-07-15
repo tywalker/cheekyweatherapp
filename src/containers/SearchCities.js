@@ -35,27 +35,10 @@ class SearchCities extends Component {
     timeTextChange = setTimeout( () => { this.startTyping() }, 100);
   }
 
-  _renderCities() {
-    return (
-      <View>
-        {
-          this.props.cities.place.map( (item, index) => {
-            return (
-              <View key={ index } style={{ height: 35, width: '100%', borderBottomWidth: 1, marginTop: 25 }}>
-                <TouchableNativeFeedback style={{ width: '100%', height: 35, paddingTop: 25 } }onPress={ () => console.warn('add city') }>
-                  <Text>{ item.name }, {item.country.content}</Text>
-                </TouchableNativeFeedback>
-              </View>
-            );
-          })
-        }
-      </View>
-    )
-  }
-
   _renderPayload() {
-    const { payload, fetching } = this.props
+    const { payload } = this.props
     if (payload.place && payload.place.length > 0) {
+      console.log('uptop: ', Array.isArray(payload.place))
       return (
         <View>
           { payload.place.map( (city, index) => {
@@ -69,21 +52,26 @@ class SearchCities extends Component {
           })}
         </View>
       )
+    } else if (payload.place && !Array.isArray(payload.place)) {
+        return (
+          <View style={{ height: 35, width: '100%', borderBottomWidth: 1, marginTop: 25 }}>
+            <TouchableNativeFeedback style={{ width: '100%', height: 35, paddingTop: 25 } }onPress={ () => console.warn('add city') }>
+              <Text>{ payload.place.name }</Text>
+            </TouchableNativeFeedback>
+          </View>
+        )
     } else {
       return <ActivityIndicator />
     }
   }
 
   render() {
-    const { searchText, fetching } = this.props
-    let renderCities = null
     this._hasFired = false
     return (
       <View style={{ height: '100%', width: '100%' }}>
         <TextInput onChangeText={ text => this.resetTimer(text) }
                    editable={ true }
                    onFocus={ () => this.initTimer() }/>
-        <Text>{ searchText }</Text>
         { this._renderPayload() }
       </View>
     );
