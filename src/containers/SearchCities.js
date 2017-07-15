@@ -52,6 +52,19 @@ class SearchCities extends Component {
     )
   }
 
+  _renderPayload() {
+    const { payload, fetching } = this.props
+    if (payload.place && payload.place.length > 0) {
+      return (
+        <View>
+        { payload.place.map( (city, index) => <Text key={ index }>{ city.name }</Text> ) }
+        </View>
+      )
+    } else {
+      return <Text>Cities</Text>
+    }
+  }
+
   _renderNullSet() {
     return (
       <View>
@@ -61,7 +74,7 @@ class SearchCities extends Component {
   }
 
   render() {
-    const { searchText } = this.props
+    const { searchText, fetching } = this.props
     let renderCities = null
     this._hasFired = false
     // if (this._hasFired && this.props.cities.place !== null) {
@@ -70,18 +83,19 @@ class SearchCities extends Component {
     //   renderCities = this._renderNullSet()
     // }
     return (
-      <View>
+      <View style={{ height: '100%', width: '100%' }}>
         <TextInput onChangeText={ text => this.resetTimer(text) }
                    editable={ true }
                    onFocus={ () => this.initTimer() }/>
         <Text>{ searchText }</Text>
-        { renderCities }
+        { this._renderPayload() }
       </View>
     );
   }
 }
 
 function mapStateToProps(state) {
+  console.log(state.cities.payload)
   return {
     cities: state.cities,
     searchText: state.cities.text,
