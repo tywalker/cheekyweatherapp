@@ -13,8 +13,6 @@ import { getSearchText, citiesFetch } from '../actions'
 class SearchCities extends Component {
   constructor() {
     super()
-
-    this._hasFired
   }
 
   startTyping = text => {
@@ -38,7 +36,6 @@ class SearchCities extends Component {
   _renderPayload() {
     const { payload } = this.props
     if (payload.place && payload.place.length > 0) {
-      console.log('uptop: ', Array.isArray(payload.place))
       return (
         <View>
           { payload.place.map( (city, index) => {
@@ -53,26 +50,42 @@ class SearchCities extends Component {
         </View>
       )
     } else if (payload.place && !Array.isArray(payload.place)) {
-        return (
-          <View style={{ height: 35, width: '100%', borderBottomWidth: 1, marginTop: 25 }}>
-            <TouchableNativeFeedback style={{ width: '100%', height: 35, paddingTop: 25 } }onPress={ () => console.warn('add city') }>
-              <Text>{ payload.place.name }</Text>
-            </TouchableNativeFeedback>
-          </View>
-        )
-    } else {
-      return <ActivityIndicator />
+      return (
+        <View style={{height: 35, width: '100%', borderBottomWidth: 1, marginTop: 25}}>
+          <TouchableNativeFeedback style={{width: '100%', height: 35, paddingTop: 25} }
+                                   onPress={ () => console.warn('add city') }>
+            <Text>{ payload.place.name }</Text>
+          </TouchableNativeFeedback>
+        </View>
+      )
+    }
+  }
+
+  _renderFailure() {
+    const { payload, success } = this.props
+    if (!payload.place) {
+      return (
+        <View style={{height: 35, width: '100%', borderBottomWidth: 1, marginTop: 25}}>
+          <TouchableNativeFeedback style={{width: '100%', height: 35, paddingTop: 25} }
+                                   onPress={ () => console.warn('add city') }>
+            <Text>{ payload }</Text>
+          </TouchableNativeFeedback>
+        </View>
+      )
     }
   }
 
   render() {
-    this._hasFired = false
+    const { fetching, success } = this.props
+    let showSearchResults = fetching && success ? <ActivityIndicator /> : this._renderPayload()
+    let showNoResults = this._renderFailure()
+    console.log(success)
     return (
       <View style={{ height: '100%', width: '100%' }}>
         <TextInput onChangeText={ text => this.resetTimer(text) }
                    editable={ true }
                    onFocus={ () => this.initTimer() }/>
-        { this._renderPayload() }
+        { success ? showSearchResults : showNoResults }
       </View>
     );
   }
@@ -82,6 +95,7 @@ function mapStateToProps(state) {
   return {
     cities: state.cities,
     searchText: state.cities.text,
+    success: state.cities.success,
     fetching: state.cities.fetching,
     payload: state.cities.payload,
   }

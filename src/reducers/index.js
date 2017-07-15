@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import { addWeather, addCity, geoFetch, forecastFetch, getSearchText } from '../actions'
-import { GET_SEARCH_TEXT, CITIES_FETCH, CITIES_REQUEST } from '../actions'
+import { addWeather, addCity  } from '../actions'
+import { GET_SEARCH_TEXT, CITIES_FETCH, CITIES_SUCCESS, CITIES_REQUEST, CITIES_FAILURE } from '../actions'
 
-function cities(state = { text: 'Enter Some Text', fetching: false, payload: [] }, action) {
+function cities(state = { text: 'Enter Some Text', success: true, fetching: false, payload: [] }, action) {
   switch (action.type) {
     case GET_SEARCH_TEXT:
       return {
@@ -14,11 +14,19 @@ function cities(state = { text: 'Enter Some Text', fetching: false, payload: [] 
         ...state,
         fetching: true,
       }
-    case CITIES_FETCH:
+    case CITIES_FAILURE:
       return {
         ...state,
+        success: false,
         fetching: false,
-        payload: action.payload
+        payload: "No Results" ,
+      }
+    case CITIES_SUCCESS:
+      return {
+        ...state,
+        success: true,
+        fetching: false,
+        payload: action.payload,
       }
     default:
       return state

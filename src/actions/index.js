@@ -7,6 +7,7 @@ export const GET_SEARCH_TEXT = 'GET_SEARCH_TEXT'
 export const CITIES_FETCH = 'CITIES_FETCH'
 export const CITIES_REQUEST = 'CITIES_REQUEST'
 export const CITIES_SUCCESS = 'CITIES_SUCCESS'
+export const CITIES_FAILURE = 'CITIES_FAILURE'
 
 export const geoSuccess = coords => {
   return {
@@ -38,9 +39,16 @@ export const citiesRequest = () => {
 }
 export const citiesSuccess = payload => {
   return {
-    type: CITIES_FETCH,
+    type: CITIES_SUCCESS,
     fetching: false,
     payload
+  }
+}
+
+export const citiesFailure = () => {
+  return {
+    type: CITIES_FAILURE,
+    fetching: false,
   }
 }
 
@@ -83,11 +91,15 @@ export function citiesFetch(searchText) {
       return fetch(url)
         .then((response) => response.json())
         .then((responseJson) => {
-          //console.log(responseJson.query.results)
-          dispatch(citiesSuccess(responseJson.query.results));
+          console.log(responseJson.query.results)
+          if (responseJson.query.results !== null) {
+            dispatch(citiesSuccess(responseJson.query.results));
+          } else {
+            dispatch(citiesFailure())
+          }
         })
         .catch((error) => {
-          console.log(error);
+          console.log(error)
         });
   }
 }
