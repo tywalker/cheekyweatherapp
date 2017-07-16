@@ -10,8 +10,6 @@ import {
   View
 } from 'react-native';
 
-import Cities from '../containers/index';
-
 const SearchCity = ( props ) => {
   return (
     <View>

@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import {
   ActivityIndicator,
-  Text,
   TextInput,
-  TouchableNativeFeedback,
   View,
 } from 'react-native';
 
 import { connect } from 'react-redux';
 import { getSearchText, citiesFetch } from '../actions'
+import CityItem from '../components/cityitem'
 
 class SearchCities extends Component {
   constructor() {
@@ -40,36 +39,22 @@ class SearchCities extends Component {
         <View>
           { payload.place.map( (city, index) => {
             return (
-              <View key={ index } style={{ height: 35, width: '100%', borderBottomWidth: 1, marginTop: 25 }}>
-                <TouchableNativeFeedback style={{ width: '100%', height: 35, paddingTop: 25 } }onPress={ () => console.warn('add city') }>
-                  <Text>{ city.name }</Text>
-                </TouchableNativeFeedback>
-              </View>
+              <CityItem key={ index } item={ city.name } />
             )
           })}
         </View>
       )
     } else if (payload.place && !Array.isArray(payload.place)) {
       return (
-        <View style={{height: 35, width: '100%', borderBottomWidth: 1, marginTop: 25}}>
-          <TouchableNativeFeedback style={{width: '100%', height: 35, paddingTop: 25} }
-                                   onPress={ () => console.warn('add city') }>
-            <Text>{ payload.place.name }</Text>
-          </TouchableNativeFeedback>
-        </View>
+        <CityItem item={ payload.place.name } />
       )
     }
   }
 
   _renderFailure() {
-    const { payload, success } = this.props
+    const { payload } = this.props
     return (
-      <View style={{height: 35, width: '100%', borderBottomWidth: 1, marginTop: 25}}>
-        <TouchableNativeFeedback style={{width: '100%', height: 35, paddingTop: 25} }
-                                 onPress={ () => console.warn('add city') }>
-          <Text>{ payload }</Text>
-        </TouchableNativeFeedback>
-      </View>
+      <CityItem item={ payload } />
     )
   }
 
@@ -90,6 +75,7 @@ class SearchCities extends Component {
 }
 
 function mapStateToProps(state) {
+  console.log(state.cities)
   return {
     cities: state.cities,
     searchText: state.cities.text,
