@@ -16,6 +16,7 @@ const CityItem = ( props ) => {
     code = props.item.country.code
   }
 
+  console.log(props.item.centroid)
   const { name } = props.item
   return (
     <View style={{height: 35, width: '100%', borderBottomWidth: 1, marginTop: 25}}>
