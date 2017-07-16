@@ -1,3 +1,4 @@
+export const VIEW_HANDLER = 'VIEW_HANDLER'
 export const ADD_CITY = 'ADD_CITY'
 export const GEO_FETCH = 'GEO_FETCH'
 export const GEO_SUCCESS = 'GEO_SUCCESS'
@@ -8,6 +9,14 @@ export const CITIES_FETCH = 'CITIES_FETCH'
 export const CITIES_REQUEST = 'CITIES_REQUEST'
 export const CITIES_SUCCESS = 'CITIES_SUCCESS'
 export const CITIES_FAILURE = 'CITIES_FAILURE'
+
+export const viewHandler = view => {
+  return {
+    type: VIEW_HANDLER,
+    animating: false,
+    view
+  }
+}
 
 export const geoSuccess = coords => {
   return {
