@@ -7,16 +7,6 @@ import {
 import { isValidObj, isValidChildObj } from '../constants'
 
 const CityItem = ( props ) => {
-  let code
-
-  // if parent object and child object are valid pass them to the code variable
-  if (isValidObj(props.item.admin1) && isValidObj(props.item.admin1.code)) {
-    code = props.item.admin1.code
-  } else if (isValidObj(props.item.country) && isValidObj(props.item.country.code)) {
-    code = props.item.country.code
-  }
-
-  console.log(props.item.centroid)
   const { name } = props.item
   return (
     <View style={{height: 35, width: '100%', borderBottomWidth: 1, marginTop: 25}}>
