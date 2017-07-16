@@ -111,7 +111,7 @@ export function addCity() {
 
 export function removeCity() {
   return function(dispatch) {
-    
+
   }
 }
 

@@ -82,6 +82,7 @@ class SearchCities extends Component {
 }
 
 function mapStateToProps(state) {
+  console.log(state.cities.payload)
   return {
     cities: state.cities,
     searchText: state.cities.text,
