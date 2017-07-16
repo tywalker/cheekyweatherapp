@@ -61,7 +61,7 @@ class SearchCities extends Component {
   }
 
   render() {
-    const { fetching, success, handleViewChange } = this.props
+    const { fetching, success } = this.props
     let showSearchResults = fetching && success ? <ActivityIndicator /> : this._renderPayload()
     let showNoResults = this._renderFailure()
 
@@ -82,7 +82,6 @@ class SearchCities extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log(state.cities.payload)
   return {
     cities: state.cities,
     searchText: state.cities.text,
