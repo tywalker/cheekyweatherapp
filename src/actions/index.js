@@ -96,7 +96,7 @@ export function citiesFetch(searchText) {
         searchText += '*'
       }
       // API call to Yahoo using their YQL syntax to receive a complete city list
-      const url = `https://query.yahooapis.com/v1/public/yql?q=select%20name%2C%20admin1%20from%20geo.places%20where%20text%3D%22${searchText}%22%20%7C%20unique(field%3D%22name%22%2C%20hideRepeatCount%3D%22true%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys`
+      const url = `https://query.yahooapis.com/v1/public/yql?q=select%20name%2C%20admin1%2C%20country %20from%20geo.places%20where%20text%3D%22${searchText}%22%20%7C%20unique(field%3D%22name%22%2C%20hideRepeatCount%3D%22true%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys`
       return fetch(url)
         .then((response) => response.json())
         .then((responseJson) => {

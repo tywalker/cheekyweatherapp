@@ -41,7 +41,7 @@ class SearchCities extends Component {
         <View>
           { payload.place.map( (city, index) => {
             return (
-              <CityItem key={ index } item={ city.name } />
+              <CityItem key={ index } item={ city } />
             )
           })}
         </View>
