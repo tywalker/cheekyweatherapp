@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import {
   ActivityIndicator,
+  Text,
   TextInput,
+  TouchableNativeFeedback,
   View,
 } from 'react-native';
 
@@ -10,8 +12,8 @@ import { getSearchText, citiesFetch } from '../actions'
 import CityItem from '../components/cityitem'
 
 class SearchCities extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
   }
 
   startTyping = text => {
@@ -59,12 +61,17 @@ class SearchCities extends Component {
   }
 
   render() {
-    const { fetching, success } = this.props
+    const { fetching, success, handleViewChange } = this.props
     let showSearchResults = fetching && success ? <ActivityIndicator /> : this._renderPayload()
     let showNoResults = this._renderFailure()
-    console.log(success)
+
     return (
       <View style={{ height: '100%', width: '100%' }}>
+        <TouchableNativeFeedback onPress={ () => this.props.handleViewChange('forecast') }>
+          <View style={{ height: 50, width: '100%', backgroundColor: '#990000' }}>
+              <Text style={{ color: '#fefefe', height: 50, width: '100%' }}>Add a New City</Text>
+          </View>
+        </TouchableNativeFeedback>
         <TextInput onChangeText={ text => this.resetTimer(text) }
                    editable={ true }
                    onFocus={ () => this.initTimer() }/>

@@ -1,6 +1,26 @@
 import { combineReducers } from 'redux';
 import { addWeather, addCity  } from '../actions'
-import { GET_SEARCH_TEXT, CITIES_FETCH, CITIES_SUCCESS, CITIES_REQUEST, CITIES_FAILURE } from '../actions'
+import {
+  VIEW_HANDLER,
+  GET_SEARCH_TEXT,
+  CITIES_SUCCESS,
+  CITIES_REQUEST,
+  CITIES_FAILURE
+} from '../actions'
+
+function views(state= { view: 'forecast' }, action) {
+  switch (action.type) {
+    case VIEW_HANDLER:
+      console.log(action.view)
+      return {
+        ...state,
+        animating: false,
+        view: action.view,
+      }
+    default:
+      return state
+  }
+}
 
 function cities(state = { text: 'Enter Some Text', success: true, fetching: false, payload: [] }, action) {
   switch (action.type) {
@@ -57,6 +77,7 @@ function forecasts(state = {forecast: {}, fetching: true}, action) {
   }
 }
 const rootReducer = combineReducers({
+  views,
   cities,
   geolocation,
   forecasts
