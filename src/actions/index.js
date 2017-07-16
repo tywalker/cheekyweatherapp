@@ -1,3 +1,4 @@
+import { isValidObj } from '../constants'
 export const VIEW_HANDLER = 'VIEW_HANDLER'
 export const ADD_CITY = 'ADD_CITY'
 export const GEO_FETCH = 'GEO_FETCH'
@@ -100,8 +101,7 @@ export function citiesFetch(searchText) {
       return fetch(url)
         .then((response) => response.json())
         .then((responseJson) => {
-          console.log(responseJson.query.results)
-          if (responseJson.query.results !== null) {
+          if (isValidObj(responseJson.query) && isValidObj(responseJson.query.results)) {
             dispatch(citiesSuccess(responseJson.query.results));
           } else {
             dispatch(citiesFailure())
