@@ -1,4 +1,5 @@
 {
-  "name": "CheekyWeatherApp",
-  "displayName": "CheekyWeatherApp"
+  "expo": {
+    "sdkVersion": "18.0.0"
+  }
 }
