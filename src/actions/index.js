@@ -1,14 +1,26 @@
+import { isValidObj } from '../constants'
+import * as DB from '../services'
+
 export const VIEW_HANDLER = 'VIEW_HANDLER'
-export const ADD_CITY = 'ADD_CITY'
+// fetch geo coordinates
 export const GEO_FETCH = 'GEO_FETCH'
 export const GEO_SUCCESS = 'GEO_SUCCESS'
+// fetch forecast
 export const FORECAST_FETCH = 'FORECAST_FETCH'
 export const FORECAST_SUCCESS = 'FORECAST_SUCCESS'
 export const GET_SEARCH_TEXT = 'GET_SEARCH_TEXT'
+// fetch cities
 export const CITIES_FETCH = 'CITIES_FETCH'
 export const CITIES_REQUEST = 'CITIES_REQUEST'
 export const CITIES_SUCCESS = 'CITIES_SUCCESS'
 export const CITIES_FAILURE = 'CITIES_FAILURE'
+// db actions
+export const ADD_CITY = 'ADD_CITY'
+export const ADD_SUCCESS = 'ADD_SUCCESS'
+export const ADD_FAILURE = 'ADD_FAILURE'
+export const REMOVE_CITY = 'REMOVE_CITY'
+export const REMOVE_SUCCESS = 'REMOVE_SUCCESS'
+export const REMOVE_FAILURE = 'REMOVE_FAILURE'
 
 export const viewHandler = view => {
   return {
@@ -46,6 +58,7 @@ export const citiesRequest = () => {
     type: CITIES_REQUEST,
   }
 }
+
 export const citiesSuccess = payload => {
   return {
     type: CITIES_SUCCESS,
@@ -58,6 +71,49 @@ export const citiesFailure = () => {
   return {
     type: CITIES_FAILURE,
     fetching: false,
+  }
+}
+
+export const addSuccess = () => {
+  return {
+    type: ADD_SUCCESS,
+    inserting: false,
+  }
+}
+
+export const addFailure = () => {
+  return {
+    type: ADD_FAILURE,
+    inserting: false,
+  }
+}
+
+export const removeSuccess = city => {
+  return {
+    type: REMOVE_SUCCESS,
+    removing: false,
+    city
+  }
+}
+
+export const removeFailure = () => {
+  return {
+    type: REMOVE_FAILURE,
+    removing: false,
+  }
+}
+
+export function addCity(cityObj, country) {
+  return function(dispatch) {
+    return Promise.resolve(DB.insertCity(cityObj, country))
+            .then( () => dispatch(addSuccess()) )
+            .catch( () => dispatch(addFailure()) )
+    }
+}
+
+export function removeCity() {
+  return function(dispatch) {
+
   }
 }
 
@@ -96,12 +152,11 @@ export function citiesFetch(searchText) {
         searchText += '*'
       }
       // API call to Yahoo using their YQL syntax to receive a complete city list
-      const url = `https://query.yahooapis.com/v1/public/yql?q=select%20name%2C%20country%20from%20geo.places%20where%20text%3D%22${searchText}%22%20%7C%20unique(field%3D%22name%22%2C%20hideRepeatCount%3D%22true%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys`
+      const url = `https://query.yahooapis.com/v1/public/yql?q=select%20name%2C%20admin1%2C%20centroid%2C%20country%20from%20geo.places%20where%20text%3D%22${searchText}%22%20%7C%20unique(field%3D%22name%22%2C%20hideRepeatCount%3D%22true%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys`
       return fetch(url)
         .then((response) => response.json())
         .then((responseJson) => {
-          console.log(responseJson.query.results)
-          if (responseJson.query.results !== null) {
+          if (isValidObj(responseJson.query) && isValidObj(responseJson.query.results)) {
             dispatch(citiesSuccess(responseJson.query.results));
           } else {
             dispatch(citiesFailure())

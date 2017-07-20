@@ -4,13 +4,15 @@ import {
   TouchableNativeFeedback,
   View,
 } from 'react-native';
+import { isValidObj, isValidChildObj } from '../constants'
 
 const CityItem = ( props ) => {
+  const { name } = props.item
   return (
     <View style={{height: 35, width: '100%', borderBottomWidth: 1, marginTop: 25}}>
       <TouchableNativeFeedback style={{width: '100%', height: 35, paddingTop: 25} }
                                onPress={ () => console.warn('add city') }>
-        <Text>{ props.item }</Text>
+        <Text>{ name ? name : 'No Results' }{ code ? `, ${code}` : ''}</Text>
       </TouchableNativeFeedback>
     </View>
   );

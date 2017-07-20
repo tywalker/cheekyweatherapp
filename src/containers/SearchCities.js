@@ -9,6 +9,7 @@ import {
 
 import { connect } from 'react-redux';
 import { getSearchText, citiesFetch } from '../actions'
+import { returnValidChild } from '../constants'
 import CityItem from '../components/cityitem'
 
 class SearchCities extends Component {
@@ -40,15 +41,20 @@ class SearchCities extends Component {
       return (
         <View>
           { payload.place.map( (city, index) => {
+            let country = returnValidChild(city.admin1, city.admin1.code)
+            !country ? returnValidChild(city.country, city.country.code) : country
             return (
-              <CityItem key={ index } item={ city.name } />
+              <CityItem key={ index } item={ city } country={ country ? country : '' } />
             )
           })}
         </View>
       )
     } else if (payload.place && !Array.isArray(payload.place)) {
+      let country = returnValidChild(payload.place.admin1, payload.place.admin1.code)
+      !country ? returnValidChild(payload.place.country, payload.place.country.code) : country
+
       return (
-        <CityItem item={ payload.place.name } />
+        <CityItem item={ payload.place.name } country={ country ? country : ''} />
       )
     }
   }
@@ -61,7 +67,7 @@ class SearchCities extends Component {
   }
 
   render() {
-    const { fetching, success, handleViewChange } = this.props
+    const { fetching, success } = this.props
     let showSearchResults = fetching && success ? <ActivityIndicator /> : this._renderPayload()
     let showNoResults = this._renderFailure()
 
@@ -82,7 +88,7 @@ class SearchCities extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log(state.cities)
+  console.log(state.cities.payload)
   return {
     cities: state.cities,
     searchText: state.cities.text,

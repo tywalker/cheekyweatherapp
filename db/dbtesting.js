@@ -2,17 +2,19 @@ const realm = require('./schema')
 const citiesObj = realm.objects('City');
 const citiesSorted = citiesObj.sorted('name');
 
-function fetchCitiesDB(queryText) {
-  text = 'ra'
-  if (typeof text !== 'undefined') {
-    console.warn(' query text not undefined ')
-    //text += '*'
-  }
-  let response = citiesObj.filtered('name BEGINSWITH[c] $0', text);
-  console.log(response);
-  }
+console.log(citiesObj)
 
-  fetchCitiesDB('r')
+// function fetchCitiesDB(queryText) {
+//   text = 'ra'
+//   if (typeof text !== 'undefined') {
+//     console.warn(' query text not undefined ')
+//     //text += '*'
+//   }
+//   let response = citiesObj.filtered('name BEGINSWITH[c] $0', text);
+//   console.log(response);
+//   }
+//
+//   fetchCitiesDB('r')
 
 // async function fetchCitiesDB(queryText) {
 //   let text = queryText[0].cities.text
