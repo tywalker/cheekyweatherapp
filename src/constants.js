@@ -8,7 +8,7 @@ export const returnValidChild = (parentObj,childObj) => {
   if (isValidObj(parentObj) && isValidObj(childObj)) {
     childProp = childObj
   } else {
-    childProp = null
+    childProp = ''
   }
   return childProp
 }
