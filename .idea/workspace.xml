@@ -2,23 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="96198421-db38-4ccc-ad7f-84604ee9f2b1" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.flowconfig" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.gitattributes" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/Cheeky.iml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/App.test.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/index.android.js" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/App.js" afterPath="$PROJECT_DIR$/App.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.json" afterPath="$PROJECT_DIR$/app.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/cityitem.js" afterPath="$PROJECT_DIR$/src/components/cityitem.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/containers/AppContainer.js" afterPath="$PROJECT_DIR$/src/containers/AppContainer.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/containers/SearchCities.js" afterPath="$PROJECT_DIR$/src/containers/SearchCities.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/services/index.js" afterPath="$PROJECT_DIR$/src/services/index.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -48,8 +32,8 @@
       <file leaf-file-name="SearchCities.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/containers/SearchCities.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="690">
-              <caret line="46" column="31" lean-forward="false" selection-start-line="46" selection-start-column="31" selection-end-line="46" selection-end-column="31" />
+            <state relative-caret-position="375">
+              <caret line="46" column="0" lean-forward="false" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -242,12 +226,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1500847715494</updated>
-      <workItem from="1500847717768" duration="1418000" />
+      <workItem from="1500847717768" duration="1688000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1418000" />
+    <option name="totallyTimeSpent" value="1688000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="545" y="48" width="1314" height="982" extended-state="0" />
@@ -328,8 +312,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/containers/SearchCities.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="690">
-          <caret line="46" column="31" lean-forward="false" selection-start-line="46" selection-start-column="31" selection-end-line="46" selection-end-column="31" />
+        <state relative-caret-position="375">
+          <caret line="46" column="0" lean-forward="false" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>

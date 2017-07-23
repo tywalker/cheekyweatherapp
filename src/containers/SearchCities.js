@@ -42,9 +42,8 @@ class SearchCities extends Component {
         <View>
           { payload.place.map( (city, index) => {
             console.log(city)
-            let country = isValidObj(city.admin1) && isValidObj(city.admin1.code) ? city.admin1.code : false
+            let country = isValidObj(city.admin1) && isValidObj(city.admin1.code) ? city.admin1.code : undefined
             country = !country && isValidObj(city.country) && isValidObj(city.country.code) ? city.country.code : country
-            console.log(country)
             return (
               <CityItem key={ index } item={ city } country={ country ? country : '' } />
             )
