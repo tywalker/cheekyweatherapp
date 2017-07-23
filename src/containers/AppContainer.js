@@ -33,7 +33,7 @@ class AppContainer extends Component {
       renderView = <ShowForecast handleViewChange={ this._handleViewChange } />
     }
     return (
-      <View style={{ height: '100%', width: '100%', backgroundColor: '#eee' }}>
+      <View style={{ height: '100%', width: '100%', backgroundColor: '#eee', marginTop: 100 }}>
          <Text>Welcome to my weather app.</Text>
         { renderView }
      </View>

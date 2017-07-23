@@ -9,7 +9,7 @@ import {
 
 import { connect } from 'react-redux';
 import { getSearchText, citiesFetch } from '../actions'
-import { returnValidChild } from '../constants'
+import { returnValidChild, isValidObj } from '../constants'
 import CityItem from '../components/cityitem'
 
 class SearchCities extends Component {
@@ -41,8 +41,10 @@ class SearchCities extends Component {
       return (
         <View>
           { payload.place.map( (city, index) => {
-            let country = returnValidChild(city.admin1, city.admin1.code)
-            !country ? returnValidChild(city.country, city.country.code) : country
+            console.log(city)
+            let country = isValidObj(city.admin1) && isValidObj(city.admin1.code) ? city.admin1.code : false
+            country = !country && isValidObj(city.country) && isValidObj(city.country.code) ? city.country.code : country
+            console.log(country)
             return (
               <CityItem key={ index } item={ city } country={ country ? country : '' } />
             )
