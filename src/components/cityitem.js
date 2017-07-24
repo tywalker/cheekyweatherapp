@@ -11,8 +11,7 @@ const CityItem = ( props ) => {
   const { country } = props.country
   return (
     <View style={{height: 35, width: '100%', borderBottomWidth: 1, marginTop: 25}}>
-      <TouchableNativeFeedback style={{width: '100%', height: 35, paddingTop: 25} }
-                               onPress={ () => console.warn('add city') }>
+      <TouchableNativeFeedback style={{width: '100%', height: 35, paddingTop: 25} }>
         <Text>{ name ? name : 'No Results' }{ country ? `, ${country}` : ''}</Text>
       </TouchableNativeFeedback>
     </View>

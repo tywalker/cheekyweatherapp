@@ -6,15 +6,21 @@ import {
   TouchableNativeFeedback,
   View,
 } from 'react-native';
-
+///////////////////////
+import { showCities, newCity } from '../services/api'
+//////////////////////
 import { connect } from 'react-redux';
-import { getSearchText, citiesFetch } from '../actions'
+import { getSearchText, citiesFetch, addCity } from '../actions'
 import { returnValidChild, isValidObj } from '../constants'
 import CityItem from '../components/cityitem'
 
 class SearchCities extends Component {
   constructor(props) {
     super(props)
+  }
+
+  componentDidUpdate() {
+    showCities()
   }
 
   startTyping = text => {
@@ -36,7 +42,7 @@ class SearchCities extends Component {
   }
 
   _renderPayload() {
-    const { payload } = this.props
+    const { payload, dispatch } = this.props
     if (payload.place && payload.place.length > 0) {
       return (
         <View>
@@ -45,7 +51,11 @@ class SearchCities extends Component {
             let country = isValidObj(city.admin1) && isValidObj(city.admin1.code) ? city.admin1.code : undefined
             country = !country && isValidObj(city.country) && isValidObj(city.country.code) ? city.country.code : country
             return (
-              <CityItem key={ index } item={ city } country={ country ? country : '' } />
+              <TouchableNativeFeedback onPress={ () => newCity(city.centroid.latitude, city.centroid.longitude, city.name, country, country) }>
+                <View>
+                  <CityItem key={ index } item={ city } country={ country ? country : '' } />
+                </View>
+              </TouchableNativeFeedback>
             )
           })}
         </View>
@@ -76,7 +86,7 @@ class SearchCities extends Component {
       <View style={{ height: '100%', width: '100%' }}>
         <TouchableNativeFeedback onPress={ () => this.props.handleViewChange('forecast') }>
           <View style={{ height: 50, width: '100%', backgroundColor: '#990000' }}>
-              <Text style={{ color: '#fefefe', height: 50, width: '100%' }}>Add a New City</Text>
+            <Text style={{ color: '#fefefe', height: 50, width: '100%' }}>Add a New City</Text>
           </View>
         </TouchableNativeFeedback>
         <TextInput onChangeText={ text => this.resetTimer(text) }

@@ -5,7 +5,8 @@ import {
   GET_SEARCH_TEXT,
   CITIES_SUCCESS,
   CITIES_REQUEST,
-  CITIES_FAILURE
+  CITIES_FAILURE,
+  ADD_CITY_SUCCESS
 } from '../actions'
 
 function views(state= { view: 'forecast' }, action) {

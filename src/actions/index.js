@@ -73,7 +73,7 @@ export const citiesFailure = () => {
   }
 }
 
-export const addSuccess = () => {
+export const addCitySuccess = () => {
   return {
     type: ADD_CITY_SUCCESS,
     inserting: false,
