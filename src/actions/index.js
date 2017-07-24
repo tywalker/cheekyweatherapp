@@ -1,3 +1,4 @@
+import { newCity } from '../services/api'
 import { isValidObj } from '../constants'
 export const VIEW_HANDLER = 'VIEW_HANDLER'
 // fetch geo coordinates
@@ -14,7 +15,7 @@ export const CITIES_SUCCESS = 'CITIES_SUCCESS'
 export const CITIES_FAILURE = 'CITIES_FAILURE'
 // db actions
 export const ADD_CITY = 'ADD_CITY'
-export const ADD_SUCCESS = 'ADD_SUCCESS'
+export const ADD_CITY_SUCCESS = 'ADD_CITY_SUCCESS'
 export const ADD_FAILURE = 'ADD_FAILURE'
 export const REMOVE_CITY = 'REMOVE_CITY'
 export const REMOVE_SUCCESS = 'REMOVE_SUCCESS'
@@ -74,7 +75,7 @@ export const citiesFailure = () => {
 
 export const addSuccess = () => {
   return {
-    type: ADD_SUCCESS,
+    type: ADD_CITY_SUCCESS,
     inserting: false,
   }
 }
@@ -101,17 +102,17 @@ export const removeFailure = () => {
   }
 }
 
-export function addCity(cityObj, country) {
+export function addCity(lat, lng, name, region, country) {
   return function(dispatch) {
-    return Promise.resolve(DB.insertCity(cityObj, country))
-            .then( () => dispatch(addSuccess()) )
+    return Promise.resolve(newCity(lat, lng, name, region, country))
+            .then( () => dispatch(addCitySuccess()) )
             .catch( () => dispatch(addFailure()) )
     }
 }
 
 export function removeCity() {
   return function(dispatch) {
-
+    // do things here
   }
 }
 

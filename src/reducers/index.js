@@ -48,6 +48,8 @@ function cities(state = { text: 'Enter Some Text', success: true, fetching: fals
         fetching: false,
         payload: action.payload,
       }
+    case ADD_CITY_SUCCESS:
+      return state
     default:
       return state
   }
