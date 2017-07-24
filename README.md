@@ -1,1 +1,1 @@
-Cheeky Weather App with React-Native
+Cheeky Weather App

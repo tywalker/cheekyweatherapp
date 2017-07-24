@@ -1,6 +1,4 @@
 import { isValidObj } from '../constants'
-import * as DB from '../services'
-
 export const VIEW_HANDLER = 'VIEW_HANDLER'
 // fetch geo coordinates
 export const GEO_FETCH = 'GEO_FETCH'

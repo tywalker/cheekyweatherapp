@@ -1,9 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, { Component } from 'react';
 import {
   AppRegistry,
@@ -20,10 +14,13 @@ const store = createStore(
   applyMiddleware(ReduxThunk)
 );
 
-const CheekyWeatherApp = () => (
-  <Provider store={ store }>
-    <AppContainer />
-  </Provider>
-)
+export default class App extends React.Component {
+  render() {
+    return (
+      <Provider store={ store }>
+        <AppContainer style={{ marginTop: 100 }}/>
+      </Provider>
+    )
 
-AppRegistry.registerComponent('CheekyWeatherApp', () => CheekyWeatherApp);
+  }
+}
